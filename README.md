@@ -36,7 +36,7 @@ Berikut tata caranya :
 3. Apabila pertanyaanmu telah terverifikasi, tunggu dokter yang ahli pada bidang yang kamu pilih untuk menjawab pertanyaanmu. </br>
 4. Setelah pertanyaanmu terjawab oleh dokter, pertanyaanmu akan berada pada halaman utama forum. </br>
 
-Di dalam aplikasi ini, Implementasi AJAX dilakukan untuk mengambil input *form* berisi judul dan isi pertanyaan serta memuat hasil tulisan hasil forum dari user dan dokter secara asinkronus.
+Di dalam aplikasi ini, Implementasi AJAX dilakukan untuk mengambil input *form* berisi judul dan isi pertanyaan serta memuat pertanyaan dari user beserta jawaban dari dokter pada forum secara asinkronus.
 
 
 ## Daftar modul yang akan diimplementasikan:
