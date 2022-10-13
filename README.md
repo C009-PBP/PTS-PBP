@@ -25,7 +25,7 @@ Di halaman pengaturan akun HealthBud, user dapat melengkapi data diri dan melaku
 
 - Jadwal praktek dokter + review dokter (Reza)
 
-App HealthBud ini manfaatnya mempermudah user untuk mencari jadwal praktek dokter dan mencari informasi rumah sakit terdekat yang ada di jadwal praktek dokter. Di dalam app Healthbud ini nanti terdapat tabel. Isi tabel tersebut ada hari tanggal bulan tahun, kemudian nama dokter, jadwal praktek dokter hari tanggal bulan tahun serta jam praktek dan tempat dokter itu praktek yang terakhir ada review dokter yang isinya adalah review dari pasien setelah konsul ke dokter tersebut. Untuk implementasi ajax terdapat pada fitur review dokter untuk input form
+App HealthBud ini manfaatnya mempermudah user untuk mencari jadwal praktek dokter dan mencari informasi rumah sakit terdekat yang ada di jadwal praktek dokter. Di dalam app Healthbud ini nanti terdapat tabel. Isi tabel tersebut ada hari tanggal bulan tahun, kemudian nama dokter, jadwal praktek dokter hari tanggal bulan tahun serta jam praktek dan tempat dokter itu praktek yang terakhir ada review dokter yang isinya adalah review dari pasien setelah konsul ke dokter tersebut. Untuk implementasi ajax terdapat pada fitur review dokter untuk input form.
 
 - Tanya Dokter (Safa)
 
@@ -35,6 +35,7 @@ Pilih spesialisasi bidang dari pertanyaan yang ingin kamu ajukan.
 Isi formulir pertanyaan yang berisi judul dan pertanyaan yang ingin kamu tanyakan.
 Apabila pertanyaanmu telah terverifikasi, tunggu dokter yang ahli pada bidang yang kamu pilih untuk menjawab pertanyaanmu.
 Setelah pertanyaanmu terjawab oleh dokter, pertanyaanmu akan berada pada halaman utama forum.
+Di dalam aplikasi ini, Implementasi AJAX dilakukan untuk mengambil input *form* berisi judul dan isi pertanyaan serta memuat hasil tulisan hasil forum dari user dan dokter secara asinkronus.
 
 
 ## Daftar modul yang akan diimplementasikan:
