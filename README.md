@@ -31,10 +31,10 @@ App HealthBud ini manfaatnya mempermudah user untuk mencari jadwal praktek dokte
 
 Healthbud dilengkapi fitur Tanya Dokter di mana orang umum dapat bertanya langsung pertanyaan-pertanyaan seputar kesehatan kepada dokter yang ahli di bidang tersebut. Ketika user masuk ke dalam app ini, akan diberikan opsi bertanya secara umum (berbentuk forum). Sebelum bertanya, tata cara akan ditampilkan dengan bentuk tampilan berupa card. 
 Berikut tata caranya :
-Pilih spesialisasi bidang dari pertanyaan yang ingin kamu ajukan.
-Isi formulir pertanyaan yang berisi judul dan pertanyaan yang ingin kamu tanyakan.
-Apabila pertanyaanmu telah terverifikasi, tunggu dokter yang ahli pada bidang yang kamu pilih untuk menjawab pertanyaanmu.
-Setelah pertanyaanmu terjawab oleh dokter, pertanyaanmu akan berada pada halaman utama forum.
+1. Pilih spesialisasi bidang dari pertanyaan yang ingin kamu ajukan. </br>
+2. Isi formulir pertanyaan yang berisi judul dan pertanyaan yang ingin kamu tanyakan.  </br>
+3. Apabila pertanyaanmu telah terverifikasi, tunggu dokter yang ahli pada bidang yang kamu pilih untuk menjawab pertanyaanmu. </br>
+4. Setelah pertanyaanmu terjawab oleh dokter, pertanyaanmu akan berada pada halaman utama forum. </br>
 Di dalam aplikasi ini, Implementasi AJAX dilakukan untuk mengambil input *form* berisi judul dan isi pertanyaan serta memuat hasil tulisan hasil forum dari user dan dokter secara asinkronus.
 
 
