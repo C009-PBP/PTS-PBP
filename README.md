@@ -1,9 +1,9 @@
 ## Kelompok C09:
-Ardhito Nurhadyansah - 2106750206
-Aulia Fikri Al Khawariz - 2106701160
-Najmi Anasya Calyla - 2106639825
-Reza Taufiq Yahya - 2106654183
-Shafa Trivia Ezananda - 2206026971
+* Ardhito Nurhadyansah - 2106750206
+* Aulia Fikri Al Khawariz - 2106701160
+* Najmi Anasya Calyla - 2106639825
+* Reza Taufiq Yahya - 2106654183
+* Shafa Trivia Ezananda - 2206026971
 
 ## Tautan aplikasi Heroku: https://healthbud.herokuapp.com/
 
@@ -38,12 +38,12 @@ Setelah pertanyaanmu terjawab oleh dokter, pertanyaanmu akan berada pada halaman
 
 
 ## Daftar modul yang akan diimplementasikan:
-Login (username+pass) + register biasa
-Form pendaftaran client/pengaturan akun (riwayat kesehatan, dll) -> Nasya
-Kalkulator BMI -> Dhito
-Jadwal praktek dokter + review dokter -> Reza
-Tanya jawab dokter (Forum) -> Safa
-Homepage (formnya → review dari pasien ke aplikasi kita), terus nanti bisa kayak ada tampilan reviews dari usernya -> Fikri
+* Login (username+pass) + register biasa
+* Form pendaftaran client/pengaturan akun (riwayat kesehatan, dll) -> Nasya
+* Kalkulator BMI -> Dhito
+* Jadwal praktek dokter + review dokter -> Reza
+* Tanya jawab dokter (Forum) -> Safa
+* Homepage (formnya → review dari pasien ke aplikasi kita), terus nanti bisa kayak ada tampilan reviews dari usernya -> Fikri
 
 
 ## Role atau peran pengguna beserta deskripsinya (karena bisa saja lebih dari satu jenis pengguna yang mengakses aplikasi):
