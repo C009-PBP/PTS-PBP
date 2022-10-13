@@ -1,62 +1,49 @@
-# Template Proyek Django PBP
+## Kelompok C09:
+- Ardhito Nurhadyansah - 2106750206
+- Aulia Fikri Al Khawariz - 2106701160
+- Najmi Anasya Calyla - 2106639825
+- Reza Taufiq Yahya - 2106654183
+- Shafa Trivia Ezananda - 2206026971
 
-Pemrograman Berbasis Platform (CSGE602022) - diselenggarakan oleh Fakultas Ilmu Komputer Universitas Indonesia, Semester Ganjil 2022/2023
+## Tautan aplikasi Heroku: 
 
-*Read this in other languages: [Indonesian](README.md), [English](README.en.md)*
+## Cerita aplikasi yang diajukan serta manfaatnya:
 
-## Pendahuluan
+HealthBud merupakan aplikasi yang dibuat untuk mendukung pengadaan fasilitas kesehatan yang efektif dan efisien. Di bawah ini merupakan fitur-fitur yang terdapat pada aplikasi HealthBud:
 
-Repositori ini merupakan sebuah template yang dirancang untuk membantu mahasiswa yang sedang mengambil mata kuliah Pemrograman Berbasis Platform (CSGE602022) mengetahui struktur sebuah proyek aplikasi Django serta file dan konfigurasi yang penting dalam berjalannya aplikasi. Kamu dapat dengan bebas menyalin isi dari repositori ini atau memanfaatkan repositori ini sebagai pembelajaran sekaligus awalan dalam membuat sebuah proyek Django.
+- Kalkulator BMI 
+Untuk membantu user dalam memantau kesehatannya secara mandiri, HealthBud menyediakan fitur kalkulator BMI. Nantinya, user dapat memasukkan tinggi dan berat badannya ke input-field yang sesuai, lalu menekan tombol submit. Hasil perhitungan serta analisisnya akan muncul di halaman yang sama dan disimpan sebagai informasi riwayat kesehatan user berdasarkan BMI. Riwayat hasil analisis BMI dapat dilihat dengan menekan tombol riwayat BMI.
 
-## Cara Menggunakan
+- Jadwal praktek dokter + review dokter 
+App HealthBud ini manfaatnya mempermudah user untuk mencari jadwal praktek dokter dan mencari informasi rumah sakit terdekat yang ada di jadwal praktek dokter. Di dalam app Healthbud ini nanti terdapat tabel. Isi tabel tersebut ada hari tanggal bulan tahun, kemudian nama dokter, jadwal praktek dokter hari tanggal bulan tahun serta jam praktek dan tempat dokter itu praktek yang terakhir ada review dokter yang isinya adalah review dari pasien setelah konsul ke dokter tersebut.
 
-Apabila kamu ingin menggunakan repositori ini sebagai repositori awalan yang nantinya akan kamu modifikasi:
+- Homepage 
+HealthBud tentunya akan mempunyai tampilan utama, di mana  semua akses untuk menuju modul lainnya akan terdapat di homepage. Ketika user sudah selesai melakukan login, maka tampilan yang terlihat akan menuju homepage. Di homepage nantinya, selain ada tombol untuk mengakses modul yang lain, maka akan terdapat juga kolom untuk menulis review dari user tentang aplikasi HealthBud. Nantinya, semua reviews dari user akan bisa dilihat di homepage, tidak hanya review dari akun yang sedang login.
 
-1. Buka laman GitHub repositori templat kode, lalu klik tombol "**Use this template**"
-   untuk membuat salinan repositori ke dalam akun GitHub milikmu.
-2. Buka laman GitHub repositori yang dibuat dari templat, lalu gunakan perintah
-   `git clone` untuk menyalin repositorinya ke suatu lokasi di dalam sistem
-   berkas (_filesystem_) komputermu:
+- Pengaturan akun 
+Di halaman pengaturan akun HealthBud, user dapat melengkapi data diri dan melakukan pengaturan akun miliknya. Salah satu fitur utama pada halaman ini adalah form riwayat kesehatan digital yang dapat diisi oleh user. Di halaman ini, akan disediakan form untuk mengisi informasi-informasi terkait kondisi kesehatan user. Setelah disimpan, data dapat diakses oleh user dan ditunjukkan saat berkonsultasi dengan dokter. Tujuan dari penyimpanan riwayat kesehatan digital adalah agar HealthBud dapat memudahkan user dalam menyimpan dan mengelola dokumen-dokumen atau informasi-informasi yang terkait dengan kondisi kesehatannya dengan aman.
 
-   ```shell
-   git clone <URL ke repositori di GitHub> <path ke suatu lokasi di filesystem>
-   ```
-3. Masuk ke dalam repositori yang sudah di-_clone_ dan jalankan perintah berikut
-   untuk menyalakan _virtual environment_:
+- Tanya Dokter
 
-   ```shell
-   python -m venv env
-   ```
-4. Nyalakan environment dengan perintah berikut:
+Healthbud dilengkapi fitur Tanya Dokter di mana orang umum dapat bertanya langsung pertanyaan-pertanyaan seputar kesehatan kepada dokter yang ahli di bidang tersebut. Ketika user masuk ke dalam app ini, akan diberikan opsi bertanya secara umum (berbentuk forum). Sebelum bertanya, tata cara akan ditampilkan dengan bentuk tampilan berupa card. 
 
-   ```shell
-   # Windows
-   .\env\Scripts\activate
-   # Linux/Unix, e.g. Ubuntu, MacOS
-   source env/bin/activate
-   ```
-5. Install dependencies yang dibutuhkan untuk menjalankan aplikasi dengan perintah berikut:
+Berikut tata caranya :
+Pilih spesialisasi bidang dari pertanyaan yang ingin kamu ajukan.
+Isi formulir pertanyaan yang berisi judul dan pertanyaan yang ingin kamu tanyakan.
+Apabila pertanyaanmu telah terverifikasi, tunggu dokter yang ahli pada bidang yang kamu pilih untuk menjawab pertanyaanmu.
+Setelah pertanyaanmu terjawab oleh dokter, pertanyaanmu akan berada pada halaman utama forum.
 
-   ```shell
-   pip install -r requirements.txt
-   ```
+## Daftar modul yang akan diimplementasikan:
+- Login (username+pass) + register biasa
+- Form pendaftaran client/pengaturan akun (riwayat kesehatan, dll) -> Nasya
+- Kalkulator BMI -> Dhito
+- Jadwal praktek dokter + review dokter -> Reza
+- Tanya jawab dokter (Forum) -> Safa
+- Homepage -> Fikri
 
-6. Jalankan aplikasi Django menggunakan server pengembangan yang berjalan secara
-   lokal:
 
-   ```shell
-   python manage.py runserver
-   ```
-7. Bukalah `http://localhost:8000` pada browser favoritmu untuk melihat apakah aplikasi sudah berjalan dengan benar.
+## Role atau peran pengguna beserta deskripsinya (karena bisa saja lebih dari satu jenis pengguna yang mengakses aplikasi):
 
-## Contoh Deployment 
+Pada implementasi aplikasi kami, jenis pengguna yang akan dapat menggunakan app ini adalah pasien dan dokter. Pasien harus login terlebih dahulu untuk dapat menggunakan app ini. Setelah berhasil masuk, akan ter-direct ke halaman homepage. Di homepage, akan ditampilkan akses ke dalam modul yang lain, seperti Kalkulator BMI, Pengaturan akun (Isi profil), jadwal praktik dan review dokter, serta Tanya Dokter.
 
-Pada template ini, deployment dilakukan dengan memanfaatkan GitHub Actions sebagai _runner_ dan Heroku sebagai platform Hosting aplikasi. 
-
-Untuk melakukan deployment, kamu dapat melihat instruksi yang ada pada [Tutorial 0](https://pbp-fasilkom-ui.github.io/ganjil-2023/assignments/tutorial/tutorial-0).
-
-Untuk contoh aplikasi Django yang sudah di deploy, dapat kamu akses di [https://django-pbp-template.herokuapp.com/](https://django-pbp-template.herokuapp.com/)
-
-## Credits
-
-Template ini dibuat berdasarkan [PBP Ganjil 2021](https://gitlab.com/PBP-2021/pbp-lab) yang ditulis oleh Tim Pengajar Pemrograman Berbasis Platform 2021 ([@prakashdivyy](https://gitlab.com/prakashdivyy)) dan [django-template-heroku](https://github.com/laymonage/django-template-heroku) yang ditulis oleh [@laymonage, et al.](https://github.com/laymonage). Template ini dirancang sedemikian rupa sehingga mahasiswa dapat menjadikan template ini sebagai awalan serta acuan dalam mengerjakan tugas maupun dalam berkarya.
+Untuk dokter, dokter juga perlu login terlebih dahulu. Setelah berhasil masuk, akan ter-direct ke halaman homepage. Di homepage, akan ditampilkan akses ke dalam modul yang lain, seperti Pengaturan akun (Isi profil), jadwal praktik dan review dokter, serta Tanya Dokter.
