@@ -36,7 +36,6 @@ Isi formulir pertanyaan yang berisi judul dan pertanyaan yang ingin kamu tanyaka
 Apabila pertanyaanmu telah terverifikasi, tunggu dokter yang ahli pada bidang yang kamu pilih untuk menjawab pertanyaanmu.
 Setelah pertanyaanmu terjawab oleh dokter, pertanyaanmu akan berada pada halaman utama forum.
 
-filter informasi -> buat yg sudah login aja
 
 ## Daftar modul yang akan diimplementasikan:
 Login (username+pass) + register biasa
