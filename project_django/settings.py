@@ -39,7 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'example_app',
+    'homepage',
+    'pengaturan_akun',
+    'bmi_calculator',
+    'info_dokter',
+    'tanya_dokter',
 ]
 
 MIDDLEWARE = [
