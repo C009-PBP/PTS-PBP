@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block meta %}
+<!-- <link rel="stylesheet" href="{% static 'css/login.css' %}"> -->
+<title>Login</title>
+
+{% endblock meta %}
+
+{% block content %}
+
+    <div class="login-container">
+            <div class="login-dark">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                        <h2 class="sr-only">Login</h2>
+                        <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
+                        <div class="form-group"><input class="form-control"  name="username" placeholder="username"></div>
+                        <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password"></div>
+                        <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button></div>
+                </form>
+
+            </div>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+            
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}     
+
+            Belum mempunyai akun? <a href="{% url 'bmi_calculator:register' %}">Buat Akun</a>
+                
+        
+        </div>
+
+    </div>
+    
+
+    <script>
+    function register() {
+        return fetch("{% url 'bmi_calculator:register' %}");
+    }
+    </script>
+    
+
+{% endblock content %}

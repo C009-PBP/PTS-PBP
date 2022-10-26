@@ -19,8 +19,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('homepage.urls')),
-    path('pengaturan_akun', include('pengaturan_akun.urls')),
-    path('bmi_calculator', include('bmi_calculator.urls')),
-    path('info_dokter', include('info_dokter.urls')),
-    path('tanya_dokter', include('tanya_dokter.urls')),
+    path('pengaturan_akun/', include('pengaturan_akun.urls')),
+    path('bmi_calculator/', include('bmi_calculator.urls')),
+    path('info_dokter/', include('info_dokter.urls')),
+    path('tanya_dokter/', include('tanya_dokter.urls')),
 ]
