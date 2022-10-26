@@ -1,26 +1,25 @@
 from urllib import request
 from django.shortcuts import render
 
-
 from .models import BMI
-import datetime
 
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseNotFound
-from django.urls import reverse
+from django.shortcuts import redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 
-from django.core import serializers
-
-
+from django.contrib import auth
 from django.contrib.auth import authenticate, login
 
 from django.contrib.auth import logout
 
 from django.contrib.auth.decorators import login_required
 
+import datetime
 
-from django.shortcuts import redirect
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib import messages
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseNotFound
+from django.urls import reverse
+
+from django.core import serializers
 
 
 # Create your views here.
@@ -71,7 +70,8 @@ def logout_user(request):
 
 @login_required(login_url='/bmi_calculator/login/')
 def show_bmi_calculator(request):
-    bmi_objects = BMI.objects.filter(user=request.user)
+    current_user = auth.get_user(request)
+    bmi_objects = BMI.objects.filter(user = current_user)
     context = {
         'bmi_objects': bmi_objects,
     }
@@ -80,12 +80,13 @@ def show_bmi_calculator(request):
 
 def show_json(request):
     # print("asijdoasdjka")
-    bmi_objects = BMI.objects.filter(user=request.user)
+    current_user = auth.get_user(request)
+    bmi_objects = BMI.objects.filter(user=current_user)
     return HttpResponse(serializers.serialize("json", bmi_objects), content_type="application/json")
-
 
 def add_bmi(request):
     if(request.method == 'POST'):
+        print("adiojasodija")
         user = request.user
         jenis_kelamin = request.POST.get('jenis_kelamin')
         umur = request.POST.get('umur')
@@ -101,7 +102,6 @@ def add_bmi(request):
         return HttpResponse(b"CREATED", status=201)
 
     return HttpResponseNotFound()
-
 
 def delete_bmi(request, id):
     if(request.method == 'GET'):
