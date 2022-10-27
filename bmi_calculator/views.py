@@ -25,50 +25,50 @@ from django.core import serializers
 # Create your views here.
 
 
-def register(request):
-    form = UserCreationForm()
+# def register(request):
+#     form = UserCreationForm()
 
-    if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Akun telah berhasil dibuat!')
-            return redirect('bmi_calculator:login')
+#     if request.method == "POST":
+#         form = UserCreationForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, 'Akun telah berhasil dibuat!')
+#             return redirect('bmi_calculator:login')
     
-    context = {'form':form}
-    return render(request, 'register.html', context)
+#     context = {'form':form}
+#     return render(request, 'register.html', context)
 
 
 
-def login_user(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user) # melakukan login terlebih dahulu
-            response = HttpResponseRedirect(reverse("bmi_calculator:show_bmi_calculator")) # membuat response
-            #response.set_cookie('last_login', str(datetime.datetime.now())) # membuat cookie last_login dan menambahkannya ke dalam response
-            return response
-        else:
-            messages.info(request, 'Username atau Password salah!')
-    context = {}
-    return render(request, 'login.html', context)
+# def login_user(request):
+#     if request.method == 'POST':
+#         username = request.POST.get('username')
+#         password = request.POST.get('password')
+#         user = authenticate(request, username=username, password=password)
+#         if user is not None:
+#             login(request, user) # melakukan login terlebih dahulu
+#             response = HttpResponseRedirect(reverse("bmi_calculator:show_bmi_calculator")) # membuat response
+#             #response.set_cookie('last_login', str(datetime.datetime.now())) # membuat cookie last_login dan menambahkannya ke dalam response
+#             return response
+#         else:
+#             messages.info(request, 'Username atau Password salah!')
+#     context = {}
+#     return render(request, 'login.html', context)
 
 
 
-def logout_user(request):
-    logout(request)
-    response = HttpResponseRedirect(reverse('bmi_calculator:login'))
-    #response.delete_cookie('last_login')
-    return response
+# def logout_user(request):
+#     logout(request)
+#     response = HttpResponseRedirect(reverse('bmi_calculator:login'))
+#     #response.delete_cookie('last_login')
+#     return response
 
 
 
 ############################################################################################################################
 
 
-@login_required(login_url='/bmi_calculator/login/')
+@login_required(login_url='/authentication/login/')
 def show_bmi_calculator(request):
     current_user = auth.get_user(request)
     bmi_objects = BMI.objects.filter(user = current_user)
