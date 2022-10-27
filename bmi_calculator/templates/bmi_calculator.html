@@ -10,24 +10,69 @@
 
 
 <body>
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand">HealthBud</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'homepage:index' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'bmi_calculator:show_bmi_calculator' %}">Kalkulator BMI</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Pengaturan Akun</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Info Dokter</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Tanya Dokter</a>
+          </li>
+          <li class="nav-item">
+            {% if request.user.is_authenticated %}
+              <a class="nav-link log" id="log" href="{% url 'authentication:logout' %}">Logout</a>
+            {% else %}
+              <a class="nav-link log" href="{% url 'authentication:login' %}">Login</a>
+            {% endif %}
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>  
+
+
+
     <div class="container p-5">
         <h1>
             <b>
-                Selamat datang di Kalkulator BMI!
+                Selamat datang di Kalkulator BMI, {{user.get_username}}!
             </b>
         </h1>
     </div>
 
     <div class="container p-5">
         <form method="POST" class="was-validated" id="form_bmi">
-          {% csrf_token %}
+            {% csrf_token %}
             <div class="mb-3 mt-3">
               <label for="tinggi" class="form-label">Tinggi badan:</label>
               <input type="number" class="form-control" id="tinggi" placeholder="Masukkan tinggi badan Anda" name="tinggi"  min="1" required>
             </div>
             <div class="mb-3">
               <label for="berat" class="form-label">Berat badan:</label>
-              <input type="number" class="form-control" id="berat" placeholder="Enter password" name="berat"  min="1" required>
+              <input type="number" class="form-control" id="berat" placeholder="Masukkan berat badan Anda" name="berat"  min="1" required>
+            </div>
+            <div class="mb-3">
+              <label for="umur" class="form-label">Umur:</label>
+              <input type="number" class="form-control" id="umur" placeholder="Masukkan umur Anda" name="umur"  min="1" required>
             </div>
             <div class="mb-3">
               <label>Jenis kelamin:</label>
@@ -36,7 +81,7 @@
               <input type="radio" id="perempuan" name="jenis_kelamin" value="Perempuan" required>
               <label for="Perempuan">Perempuan</label><br>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <input type="submit" value="Get BMI" onclick="addBMI()">
         </form>
     
     </div>

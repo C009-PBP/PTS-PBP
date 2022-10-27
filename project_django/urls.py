@@ -18,6 +18,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('authentication/', include('authentication.urls')),
     path('', include('homepage.urls')),
     path('pengaturan_akun/', include('pengaturan_akun.urls')),
     path('bmi_calculator/', include('bmi_calculator.urls')),
