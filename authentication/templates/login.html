@@ -33,7 +33,7 @@
                 </ul>
             {% endif %}     
 
-            Belum mempunyai akun? <a href="{% url 'bmi_calculator:register' %}">Buat Akun</a>
+            Belum mempunyai akun? <a href="{% url 'authentication:register' %}">Buat Akun</a>
                 
         
         </div>
@@ -43,7 +43,7 @@
 
     <script>
     function register() {
-        return fetch("{% url 'bmi_calculator:register' %}");
+        return fetch("{% url 'authentication:register' %}");
     }
     </script>
     
