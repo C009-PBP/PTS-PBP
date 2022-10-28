@@ -5,7 +5,7 @@ from authentication.models import User
 # from django.http.response import HttpResponseRedirect
 # from django.utils.timezone import now
 
-
+from authentication.models import User
 # Create your models here.
 class Forum(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
