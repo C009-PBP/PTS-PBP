@@ -23,13 +23,6 @@ from django.contrib.auth.decorators import user_passes_test
 # Create your views here.
 def register(request):
     form = UserCreationForm()
-
-    # if request.method == "POST":
-    #     form = UserCreationForm(request.POST)
-    #     if form.is_valid():
-    #         form.save()
-    #         messages.success(request, 'Akun telah berhasil dibuat!')
-    #         return redirect('authentication:login')
     
     context = {'form':form}
     return render(request, 'register.html', context)
