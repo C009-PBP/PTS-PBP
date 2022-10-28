@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 
 # from .models import Pasien, Dokter, User
-from .models import  User
+from .models import User
 
 class PasienSignUpForm(UserCreationForm):
     # interests = forms.ModelMultipleChoiceField(
