@@ -11,4 +11,51 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+
+<script>
+        const form = document.getElementById('form');
+        form.addEventListener("submit", submitHandler);
+        
+        function submitHandler(e) {
+                e.preventDefault();
+                $.ajax({
+                type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                url         : '{% url 'tanya_dokter:add_question_ajax' %}', // the url where we want to POST
+                data        : $('#form').serialize(), // our form data
+                dataType    : 'json', // what type of data do we expect back from the server
+                success     : successFunction
+                });
+        }
+        
+        function successFunction(msg) {
+                if (msg.message === 'success') {
+                alert('Success!');
+                form.reset()
+                }
+        }
+</script>
 {% endblock meta %}
+
+{% block content %}
+<h1>Tes Form</h1>
+<div class="container pt-4">
+
+        <form method="POST" id="form">
+                {% csrf_token %}
+                <div class="mb-3">
+                        <label for="specialization" class="col-form-label">Specialization:</label>
+                        <input type="text" class="form-control" id="specialization">
+                </div>
+                <div class="mb-3">
+                        <label for="title" class="col-form-label">Title:</label>
+                        <input type="text" class="form-control" id="title">
+                </div>
+                <div class="mb-3">
+                        <label for="question_text" class="col-form-label">Question:</label><br>
+                        <textarea class="form-control" id="question_text"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+</div>
+
+{% endblock content %}
