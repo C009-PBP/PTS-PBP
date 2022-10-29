@@ -1,6 +1,6 @@
 [
     {
-        "model":"info_dokter.ModelInfoDokter",
+        "model":"info_dokter.InfoDokter",
         "pk":1,
         "fields":{
             "nama_dokter":"dr. Eveline Panjaitan, SpA",
@@ -10,7 +10,7 @@
         }
 },
 {
-        "model":"info_dokter.ModelInfoDokter",
+        "model":"info_dokter.InfoDokter",
         "pk":2,
         "fields":{
             "nama_dokter":"dr. Irman, SpAk",
@@ -20,7 +20,7 @@
         }
     },
     {
-        "model":"info_dokter.ModelInfoDokter",
+        "model":"info_dokter.InfoDokter",
         "pk":3,
         "fields":{
             "nama_dokter":"dr. Yoan Catherina, SpAn",
@@ -30,7 +30,7 @@
         }
     },
     {
-        "model":"info_dokter.ModelInfoDokter",
+        "model":"info_dokter.InfoDokter",
         "pk":4,
         "fields":{
             "nama_dokter":"dr. Iskandar R. Budianto, Sp.B - Sp.BA",
@@ -40,7 +40,7 @@
         }
     },
     {
-        "model":"info_dokter.ModelInfoDokter",
+        "model":"info_dokter.InfoDokter",
         "pk":5,
         "fields":{
             "nama_dokter":"dr. Bagus Pramantha, SpOT",
