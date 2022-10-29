@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+<!-- {% block meta %} -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script>
+
+// For adding new Review
+$("#addReview").submit(function (e) {
+  e.preventDefault();
+  var serializedData = $(this).serialize();
+  $.ajax({
+      url: "{% url 'info_dokter:add_review' %}",
+      type: "POST",
+      data: serializedData,
+      dataType: 'text',
+      success: function (data) {
+          $("#exampleModal").modal('hide');
+          $('#addReview').each(function () {
+              this.reset();
+          });
+
+          // Empty div class and make new
+          $("#data").empty();
+          $.get( "{% url 'info_dokter:show_json' %}", function(data) {
+            taskData(data);
+          });
+      }
+  });    
+});
+
+$()
+    </script>
+{% endblock meta %} -->
+
+{% block content %}
+
+<table class="table table-success table-striped table-bordered">
+    <tr>
+    <th class="table-light">Nama Dokter</th>
+    <th class="table-light">Hari Praktek</th>
+    <th class="table-light">Jadwal Praktek</th>
+    <th class="table-light">Review</th>
+    </tr>
+    <tbody class="table-group-divider">
+    ...
+    {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
+    {% for info in list_info %}
+    <tr>
+        <th>{{info.nama_dokter}}</th>
+        <th>{{info.hari_praktek}}</th>
+        <th>{{info.jadwal_praktek}}</th>
+        <th>{{info.review}}</th>
+    </tr>
+    {% endfor %}
+</table>
+<!-- <div class="container-fluid">
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Update Review
+  </button>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Review</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addReview">
+            {% csrf_token %}
+    
+                <p>Review:</p>
+                <textarea cols="100" rows="10" name="review" placeholder="Review" class="form-control" style="max-width: 100%;"></textarea><br/>
+                
+            <div style="margin: 10px auto;">
+                <input class="btn btn-primary" type="submit" name="submit" value="Add">
+            </div>
+  
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row" style="margin-left:10px; margin-right:10px" id="data">
+  </div> -->
+{% endblock content %}

@@ -1,0 +1,52 @@
+[
+    {
+        "model":"info_dokter.ModelInfoDokter",
+        "pk":1,
+        "fields":{
+            "nama_dokter":"dr. Eveline Panjaitan, SpA",
+            "hari_praktek" : "Senin",
+            "jadwal_praktek":"09:00 - 12:00",
+            "review": "-"
+        }
+},
+{
+        "model":"info_dokter.ModelInfoDokter",
+        "pk":2,
+        "fields":{
+            "nama_dokter":"dr. Irman, SpAk",
+            "hari_praktek" : "Selasa",
+            "jadwal_praktek":"13:00 - 16:00",
+            "review": "-"
+        }
+    },
+    {
+        "model":"info_dokter.ModelInfoDokter",
+        "pk":3,
+        "fields":{
+            "nama_dokter":"dr. Yoan Catherina, SpAn",
+            "hari_praktek" : "Rabu",
+            "jadwal_dokter":"16:00 - 18:00",
+            "review": "-"
+        }
+    },
+    {
+        "model":"info_dokter.ModelInfoDokter",
+        "pk":4,
+        "fields":{
+            "nama_dokter":"dr. Iskandar R. Budianto, Sp.B - Sp.BA",
+            "hari_praktek" : "Kamis",
+            "jadwal_praktek":"10:00 - 12:00",
+            "review": "-"
+        }
+    },
+    {
+        "model":"info_dokter.ModelInfoDokter",
+        "pk":5,
+        "fields":{
+            "nama_dokter":"dr. Bagus Pramantha, SpOT",
+            "hari_praktek" : "Jumat",
+            "jadwal_praktek":"15:00 - 18:00",
+            "review": "-"
+        }
+    }
+]
