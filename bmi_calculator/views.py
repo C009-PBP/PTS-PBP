@@ -25,6 +25,7 @@ from authentication.decorators import pasien_required, dokter_required
 
 from django.utils.decorators import method_decorator
 
+from .forms import Form_BMI
 
 # Create your views here.
 
@@ -71,7 +72,7 @@ from django.utils.decorators import method_decorator
 
 ############################################################################################################################
 
-@login_required
+@login_required(login_url='/authentication/login')
 def show_bmi_calculator(request):
     current_user = auth.get_user(request)
 
@@ -79,8 +80,10 @@ def show_bmi_calculator(request):
         return redirect('authentication:login')
 
     bmi_objects = BMI.objects.filter(user = current_user)
+    form_bmi = Form_BMI()
     context = {
         'bmi_objects': bmi_objects,
+        'form_bmi' : form_bmi,
     }
     
     return render(request, "bmi_calculator.html", context)
@@ -99,14 +102,6 @@ def show_json(request):
     
 #     print(bmi_object)
 #     return bmi_object
-
-def show_json_new_bmi(request):
-    print("tes show_json_new_bmi")
-    current_user = auth.get_user(request)
-    bmi_object = BMI.objects.filter(user=current_user)
-    
-    print(bmi_object)
-    return HttpResponse(serializers.serialize("json", bmi_object), content_type="application/json")
 
 def add_bmi(request):
     print("tesssssssss")
