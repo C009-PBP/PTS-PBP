@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 
 {% block meta %}
-<script
-        src="https://code.jquery.com/jquery-3.5.0.min.js"
+<script src="https://code.jquery.com/jquery-3.5.0.min.js"
         integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
@@ -11,50 +10,64 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
 <script>
-        const form = document.getElementById('form');
-        form.addEventListener("submit", submitHandler);
-        
-        function submitHandler(e) {
+        $(document).on('submit', '#form_add_task', function(e) {
                 e.preventDefault();
                 $.ajax({
-                type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
-                url         : '{% url 'tanya_dokter:add_question_ajax' %}', // the url where we want to POST
-                data        : $('#form').serialize(), // our form data
-                dataType    : 'json', // what type of data do we expect back from the server
-                success     : successFunction
+                type:"POST",
+                url:"{% url 'tanya_dokter:add_question_ajax' %}",
+                data:{
+                        title:$('#title-input').val(),
+                        specialization:$('#spec-input').val(), 
+                        question:$('textarea').val(), 
+                        csrfmiddlewaretoken:'{{ csrf_token }}',
+                        action: 'post',
+                },
+                dataType: 'json',
+                success: successFunction,
                 });
-        }
+                
+        });
         
+
         function successFunction(msg) {
                 if (msg.message === 'success') {
-                alert('Success!');
-                form.reset()
+                    alert('Success!');
+                    form.reset()
                 }
-        }
-</script>
+            }
+        
+        </script>
 {% endblock meta %}
 
 {% block content %}
 <h1>Tes Form</h1>
 <div class="container pt-4">
 
-        <form method="POST" id="form">
+        <form method="POST" id="add_forum" action="">
                 {% csrf_token %}
-                <div class="mb-3">
+                <div class="form-group">
                         <label for="specialization" class="col-form-label">Specialization:</label>
-                        <input type="text" class="form-control" id="specialization">
+                        <input id="spec-input" class="form-control" type="text" name="specialization" placeholder="Umum" required>
                 </div>
-                <div class="mb-3">
+                <br>
+                <div class="form-group">
                         <label for="title" class="col-form-label">Title:</label>
-                        <input type="text" class="form-control" id="title">
+                        <input id="title-input" class="form-control" type="text" name="title" size="50" placeholder="Bagaimana Cara Mengatasi Demam?" required>
                 </div>
-                <div class="mb-3">
-                        <label for="question_text" class="col-form-label">Question:</label><br>
-                        <textarea class="form-control" id="question_text"></textarea>
+                <br>
+                <div class="form-group">
+                        <label for="question" class="col-form-label">Question:</label><br>
+                        <textarea id="question" class="form-control" type="text" name="question" rows="4" cols="50" placeholder="......" required></textarea>
+                        {% comment %} <textarea id="que-input" class="form-control" placeholder="question" required></textarea> {% endcomment %}
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <br>
+                <button type="submit" class="btn btn-primary group" id="form_add_forum">Submit</button>
+                
         </form>
 </div>
 

@@ -1,17 +1,18 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 # from django.contrib.auth.forms import UserCreationForm
 # from django.contrib import messages
 # from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 # from django.contrib.auth.forms import UserCreationForm
 
-# import datetime
-from django.http import HttpResponse, JsonResponse
+import datetime
+from django.http import HttpResponse
 # from django.urls import reverse
 
 from django.core import serializers
 
-from tanya_dokter.forms import ForumForm
+# from django.views.generic import ListView, View
+# from tanya_dokter.forms import ForumForm
 from tanya_dokter.models import Forum
 
 
@@ -26,7 +27,8 @@ from tanya_dokter.models import Forum
 # def create_forum(request):
 #     form = ForumForm()
 #     if request.method == 'POST':
-#         form = ForumForm(request.POST)
+#         form = ForumForm(request.
+# )
 
 #         # form.instance.user = request.user
 #         form.instance.date = datetime.datetime.now()
@@ -40,10 +42,40 @@ from tanya_dokter.models import Forum
 #         form = ForumForm()
 #         return render(request, 'create-task.html', {'form': form})
 
-def forum(request):
-    post = Forum.objects.all()
-    response = {'post': post}
-    return render(request, 'tanya_dokter/forum.html', response)
+# class ForumView(ListView):
+#     model = Forum
+#     template_name = 'tanya_dokter/form.html'
+#     context_object_name = 'forum'
+
+
+# class CreateForum(View):
+#     @login_required(login_url='/authentication/login/')
+#     def get(self, request):
+#         specialization1 = request.GET.get('specialization', None)
+#         title1 = request.GET.get('title', None)
+#         question_text1 = request.GET.get('question_text', None)
+
+#         obj = Forum.objects.create(
+#             specialization=specialization1,
+#             title=title1,
+#             question_text=question_text1,
+#             date=datetime.datetime.now(),
+#             # user=request.user,
+#         )
+
+#         forum = {
+#             # 'user': obj.user,
+#             'specialization': obj.specialization,
+#             'title': obj.title,
+#             'question_text': obj.question_text,
+#             'date': obj.date
+#         }
+
+#         data = {
+#             'forum': forum
+#         }
+#         return JsonResponse(data)
+
 
 # @login_required(login_url='/authentication/login/')
 # def show_landing_page(request):
@@ -69,17 +101,16 @@ def forum(request):
 
 @login_required(login_url='/authentication/login/')
 def show_landing_page(request):
-    try:
-        user = request.user
-        data = Forum.objects.filter(user=user)
-        context = {
-            'forum': data,
-            'nama': user.username,
-            'last_login': request.COOKIES['last_login'],
-        }
-        return render(request, "tanya_dokter/landing.html", context)
-    except KeyError:
-        return redirect('authentication:login')
+    # try:
+    user = request.user
+    data = Forum.objects.filter(user=user)
+    context = {
+        'forum': data,
+        'nama': user.username,
+    }
+    return render(request, "tanya_dokter/landing.html", context)
+    # except KeyError:
+    #     return redirect('authentication:login')
 
 
 @login_required(login_url='/authentication/login/')
@@ -96,7 +127,6 @@ def show_forum(request):
     data = Forum.objects.filter(user=user)
     context = {
         'forum': data,
-        # 'last_login': request.COOKIES['last_login'],
     }
     return render(request, "tanya_dokter/forum.html", context)
 
@@ -104,18 +134,38 @@ def show_forum(request):
 # MASI ERROR INI, GAMAU MASUK KE IF
 @login_required(login_url='/authentication/login/')
 def add_question_ajax(request):
-    form_class = ForumForm
-    form = form_class(request.POST)
-
+    form = Forum.objects.all()
     if request.method == 'POST':
+        title = request.POST.get('title')
+        question = request.POST.get('question')
+        specialization = request.POST.get('specialization')
+      
+        addedForm = Forum.objects.create(
+            title=title,
+            question=question,
+            specialization=specialization,
+            date=datetime.datetime.now(),
+            user=request.user,
+        )
 
-        if form.is_valid():
-            form.save()
-            return JsonResponse({
-                'message': 'success'
-            })
+        addedForm.save()
+        return render(request, "tanya_dokter/add_forum.html",
+                      {'tanya_dokter': form})
+    return render(request, "tanya_dokter/add_forum.html",
+                  {'tanya_dokter': form})
+
+    # form_class = ForumForm
+    # form = form_class(request.POST)
+
+    # if request.method == 'POST':
+
+    #     if form.is_valid():
+    #         form.save()
+    #         return JsonResponse({
+    #             'message': 'success'
+    #         })
     
-    return render(request, 'tanya_dokter/form.html', {'tanya_dokter': form})
+    # return render(request, 'tanya_dokter/form.html', {'tanya_dokter': form})
     #     # forums = ForumForm.objects.all()
     #     # title = request.POST.get('title')
     #     # question_text = request.POST.get('question_text')

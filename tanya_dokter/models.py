@@ -5,14 +5,14 @@ from authentication.models import User
 # from django.http.response import HttpResponseRedirect
 # from django.utils.timezone import now
 
-from authentication.models import User
+
 # Create your models here.
 class Forum(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(null=False, blank=False, auto_now_add=True)
     specialization = models.CharField(max_length=100)
     title = models.CharField(max_length=255)
-    question_text = models.TextField(blank=True, null=True)
+    question = models.TextField()
 
     def __str__(self):
         return str(self.title)

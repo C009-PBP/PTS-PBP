@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<script
+        src="https://code.jquery.com/jquery-3.5.0.min.js"
+        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+<script>
+        var counter = 0;
+        function createTableAjax(){
+                // clear table
+                var tempCount = counter;
+        
+                $.get("http://localhost:8000/tanya_dokter/json/", function(data) {
+                
+                // fill table
+                for(var i = counter; i < data.length; i++){
+                var tr = document.createElement("tr");
+                // var tdUser = document.createElement("td");
+                // tdUser.append(data[i].fields.user);
+                var tdDate = document.createElement("td");
+                tdDate.append(data[i].fields.date);
+                var tdSpecialization = document.createElement("td");
+                tdSpecialization.append(data[i].fields.specialization);
+                var tdTitle = document.createElement("td");
+                tdTitle.append(data[i].fields.title);
+                var tdQuestion = document.createElement("td");
+                tdQuestion.append(data[i].fields.question);
+                
+                
+                // tr.append(tdUser);
+                tr.append(tdDate);
+                tr.append(tdSpecialization);
+                tr.append(tdTitle);
+                tr.append(tdQuestion);
+                
+                $(".table").append(tr);
+                tempCount+=1;
+                }
+                counter = tempCount;
+                });
+        }
+        
+        $(document).ready(function(){
+                $("#getData").click(function(){
+                
+                createTableAjax();
+        
+                });
+        });
+        
+        $(document).on('submit', '#form_add_task', function(e) {
+                e.preventDefault();
+                $.ajax({
+                type:"POST",
+                url:"{% url 'tanya_dokter:add_question_ajax' %}",
+                data:{
+                        title:$('#title-input').val(),
+                        specialization:$('#spec-input').val(), 
+                        question:$('textarea').val(), 
+                        csrfmiddlewaretoken:'{{ csrf_token }}',
+                        action: 'post',
+                },
+                dataType: 'json',
+                success: successFunction,
+                });
+                
+        });
+        
+
+        function successFunction(msg) {
+                if (msg.message === 'success') {
+                    alert('Success!');
+                    form.reset()
+                }
+            }
+        
+        </script>
+
+{% endblock meta %}
+
+{% block content %}
+<h1>Tes Forum</h1>
+<h3 id="form-title">Add New Discussion</h3>
+
+<div class="container pt-4">
+<form method="POST" id="add_forum" action="">
+        {% csrf_token %}
+        <div class="form-group">
+                <label for="specialization" class="col-form-label">Specialization:</label>
+                <input id="spec-input" class="form-control" type="text" name="specialization" placeholder="Umum" required>
+        </div>
+        <br>
+        <div class="form-group">
+                <label for="title" class="col-form-label">Title:</label>
+                <input id="title-input" class="form-control" type="text" name="title" size="50" placeholder="Bagaimana Cara Mengatasi Demam?" required>
+        </div>
+        <br>
+        <div class="form-group">
+                <label for="question" class="col-form-label">Question:</label><br>
+                <textarea id="question" class="form-control" type="text" name="question" rows="4" cols="50" placeholder="......" required></textarea>
+                {% comment %} <textarea id="que-input" class="form-control" placeholder="question" required></textarea> {% endcomment %}
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary group" id="form_add_forum">Submit</button>
+        
+</form>
+<br>
+</div>
+
+<button id="getData">Get Data</button>
+<br>
+
+<table class="table"> 
+        <tr>
+            <!-- <th>User</th> -->
+            <th>Date</th>
+            <th>Specialization</th>
+            <th>Title</th>
+            <th>Question</th>
+        </tr>
+        
+    </table>
+    
+
+
+{% comment %} 
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add Question</button>
+<form action="" method="POST">
+        {% csrf_token %}
+        <div>
+                <label for="title"><span>Title<span class="required">*</span></span></label><br>
+                </div>
+                <input class="form-control" type="text" name="title" required><br>
+                <div class="input-group-append">
+                <label for="message"><span>Message<span class="required">*</span></span></label><br>
+                </div>
+                <textarea class="form-control" type="text" name="message" rows="10" cols="30" maxlength="1000000" required></textarea>
+                <div class="d-flex justify-content-center mt-3 login_container">
+                <input type="submit" class="btn discbtn" value="Add New Discussion">
+        </div>
+</form> {% endcomment %}
+
+{% endblock content %}

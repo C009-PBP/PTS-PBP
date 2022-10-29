@@ -6,8 +6,7 @@
 
 {% block content %}
 <h1>Tes</h1>
-
-<h5>Sesi terakhir login: {{ last_login }}</h5>
+<h1>Halo, {{user.get_username}}</h1>
 
 <button><a href="{% url 'tanya_dokter:show_forum' %}">Forum button</a></button><br/><br/>
 

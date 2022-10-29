@@ -12,36 +12,61 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 
+<script>
+    var counter = 0;
+    createTableAjax();
+    function createTableAjax(){
+        // clear table
+        var tempCount = counter;
+
+        $.get("http://localhost:8000/tanya_dokter/json/", function(data) {
+        
+        // fill table
+        for(var i = counter; i < data.length; i++){
+        var tr = document.createElement("tr");
+        // var tdUser = document.createElement("td");
+        // tdUser.append(data[i].fields.user);
+        var tdDate = document.createElement("td");
+        tdDate.append(data[i].fields.date);
+        var tdSpecialization = document.createElement("td");
+        tdSpecialization.append(data[i].fields.specialization);
+        var tdTitle = document.createElement("td");
+        tdTitle.append(data[i].fields.title);
+        var tdQuestion = document.createElement("td");
+        tdQuestion.append(data[i].fields.question);
+        
+        
+        // tr.append(tdUser);
+        tr.append(tdDate);
+        tr.append(tdSpecialization);
+        tr.append(tdTitle);
+        tr.append(tdQuestion);
+        
+        $(".table").append(tr);
+        tempCount+=1;
+        }
+        counter = tempCount;
+        });
+    }
+        
+</script>
+
 {% endblock meta %}
 
 {% block content %}
-<h1>Tes Forum</h1>
-<h3 id="form-title">Add New Discussion</h3>
+<h1>Forum</h1>
+<button><a href="{% url 'tanya_dokter:add_question_ajax' %}">Isi pertanyaan kuy</a></button><br/><br/>
 
-<div class="mt-3">
-<div id="alert-box"></div>
-        <form id="p-form">
-        {% csrf_token %}
-        {{forum.as_p}}
-        </form>
-</div>
-
-
-{% comment %} 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add Question</button>
-<form action="" method="POST">
-        {% csrf_token %}
-        <div>
-                <label for="title"><span>Title<span class="required">*</span></span></label><br>
-                </div>
-                <input class="form-control" type="text" name="title" required><br>
-                <div class="input-group-append">
-                <label for="message"><span>Message<span class="required">*</span></span></label><br>
-                </div>
-                <textarea class="form-control" type="text" name="message" rows="10" cols="30" maxlength="1000000" required></textarea>
-                <div class="d-flex justify-content-center mt-3 login_container">
-                <input type="submit" class="btn discbtn" value="Add New Discussion">
-        </div>
-</form> {% endcomment %}
+<table class="table"> 
+    <tr>
+        <!-- <th>User</th> -->
+        <th>Date</th>
+        <th>Specialization</th>
+        <th>Title</th>
+        <th>Question</th>
+    </tr>
+        
+</table>
+ 
 
 {% endblock content %}
