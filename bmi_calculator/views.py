@@ -21,6 +21,10 @@ from django.urls import reverse
 
 from django.core import serializers
 
+from authentication.decorators import pasien_required, dokter_required
+
+from django.utils.decorators import method_decorator
+
 
 # Create your views here.
 
@@ -67,10 +71,13 @@ from django.core import serializers
 
 ############################################################################################################################
 
-
-@login_required(login_url='/authentication/login/')
+@login_required
 def show_bmi_calculator(request):
     current_user = auth.get_user(request)
+
+    if(not current_user.is_pasien):
+        return redirect('authentication:login')
+
     bmi_objects = BMI.objects.filter(user = current_user)
     context = {
         'bmi_objects': bmi_objects,
@@ -85,16 +92,18 @@ def show_json(request):
     return HttpResponse(serializers.serialize("json", bmi_objects), content_type="application/json")
 
 def add_bmi(request):
+    print("tesssssssss")
     if(request.method == 'POST'):
         print("adiojasodija")
-        user = request.user
+        current_user = auth.get_user(request)
         jenis_kelamin = request.POST.get('jenis_kelamin')
         umur = request.POST.get('umur')
         tinggi = request.POST.get('tinggi')
         berat = request.POST.get('berat')
         date_created = datetime.datetime.now()
 
-        new_bmi = BMI(user=user, jenis_kelamin=jenis_kelamin, umur=umur, tinggi=tinggi, berat=berat, date_created=date_created)
+        print("tesssssssss")
+        new_bmi = BMI(user=current_user, jenis_kelamin=jenis_kelamin, umur=umur, tinggi=tinggi, berat=berat, date_created=date_created)
         new_bmi.save()
 
         print("add berhasil")

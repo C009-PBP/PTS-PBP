@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<script
+        src="https://code.jquery.com/jquery-3.5.0.min.js"
+        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+<script>
+    var counter = 0;
+    createTableAjax();
+    function createTableAjax(){
+        // clear table
+        var tempCount = counter;
+
+        $.get("http://localhost:8000/tanya_dokter/json/", function(data) {
+        
+        // fill table
+        for(var i = counter; i < data.length; i++){
+        var tr = document.createElement("tr");
+        // var tdUser = document.createElement("td");
+        // tdUser.append(data[i].fields.user);
+        var tdDate = document.createElement("td");
+        tdDate.append(data[i].fields.date);
+        var tdSpecialization = document.createElement("td");
+        tdSpecialization.append(data[i].fields.specialization);
+        var tdTitle = document.createElement("td");
+        tdTitle.append(data[i].fields.title);
+        var tdQuestion = document.createElement("td");
+        tdQuestion.append(data[i].fields.question);
+        
+        
+        // tr.append(tdUser);
+        tr.append(tdDate);
+        tr.append(tdSpecialization);
+        tr.append(tdTitle);
+        tr.append(tdQuestion);
+        
+        $(".table").append(tr);
+        tempCount+=1;
+        }
+        counter = tempCount;
+        });
+    }
+        
+</script>
+
+{% endblock meta %}
+
+{% block content %}
+<h1>Forum</h1>
+<button><a href="{% url 'tanya_dokter:add_question_ajax' %}">Isi pertanyaan kuy</a></button><br/><br/>
+
+<table class="table"> 
+    <tr>
+        <!-- <th>User</th> -->
+        <th>Date</th>
+        <th>Specialization</th>
+        <th>Title</th>
+        <th>Question</th>
+    </tr>
+        
+</table>
+ 
+
+{% endblock content %}

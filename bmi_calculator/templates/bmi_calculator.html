@@ -129,7 +129,7 @@
 
 
   function addBMI() {
-    // console.log("TES")
+    console.log("TESaddd")
     fetch("{% url 'bmi_calculator:add_bmi' %}", {
           method: "POST",
           body: new FormData(document.querySelector('#form_bmi'))
@@ -149,7 +149,6 @@
   function viewBMIHistory(){
     
   }
-
 
   refreshBMIPage()  
 </script>

@@ -16,19 +16,43 @@ from django.urls import reverse
 
 from django.core import serializers
 
+from .forms import PasienSignUpForm, DokterSignUpForm
+
+from django.contrib.auth.decorators import user_passes_test
+
 # Create your views here.
 def register(request):
     form = UserCreationForm()
+    
+    context = {'form':form}
+    return render(request, 'register.html', context)
+
+def register_pasien(request):
+    form = PasienSignUpForm()
 
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = PasienSignUpForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Akun telah berhasil dibuat!')
             return redirect('authentication:login')
     
     context = {'form':form}
-    return render(request, 'register.html', context)
+    return render(request, 'register_pasien.html', context)
+
+
+def register_dokter(request):
+    form = DokterSignUpForm()
+
+    if request.method == "POST":
+        form = DokterSignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Akun telah berhasil dibuat!')
+            return redirect('authentication:login')
+    
+    context = {'form':form}
+    return render(request, 'register_dokter.html', context)
 
 
 
