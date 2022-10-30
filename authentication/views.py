@@ -31,12 +31,17 @@ def register_pasien(request):
     form = PasienSignUpForm()
 
     if request.method == "POST":
+        print("tes form PASIEN")
         form = PasienSignUpForm(request.POST)
         if form.is_valid():
+            print("tes form PASIEN IS VALID")
             form.save()
+
+            print("tes form PASIEN SAVED")
             messages.success(request, 'Akun telah berhasil dibuat!')
             return redirect('authentication:login')
     
+    print("tes form PASIEN GET")
     context = {'form':form}
     return render(request, 'register_pasien.html', context)
 
@@ -45,6 +50,7 @@ def register_dokter(request):
     form = DokterSignUpForm()
 
     if request.method == "POST":
+        print("tes form DOKTER")
         form = DokterSignUpForm(request.POST)
         if form.is_valid():
             form.save()
