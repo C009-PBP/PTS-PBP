@@ -1,5 +1,4 @@
 ## OK
-
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
@@ -14,8 +13,20 @@ class PasienSignUpForm(UserCreationForm):
     #     required=True
     # )
 
+
     class Meta(UserCreationForm.Meta):
         model = User
+        fields = ('username', 'password1', 'password2')
+
+    def __init__(self, *args, **kwargs):
+        super(PasienSignUpForm, self).__init__(*args, **kwargs)
+
+        self.fields['username'].widget.attrs['class'] = 'form-control register-pasien'
+        self.fields['password1'].widget.attrs['class'] = 'form-control register-pasien'
+        self.fields['password2'].widget.attrs['class'] = 'form-control register-pasien'
+
+        for fieldname in ['username', 'password1', 'password2']:
+            self.fields[fieldname].help_text = None
 
     @transaction.atomic
     def save(self):
@@ -29,8 +40,21 @@ class PasienSignUpForm(UserCreationForm):
 
 
 class DokterSignUpForm(UserCreationForm):
+
     class Meta(UserCreationForm.Meta):
         model = User
+        fields = ('username', 'password1', 'password2')
+
+    def __init__(self, *args, **kwargs):
+        super(DokterSignUpForm, self).__init__(*args, **kwargs)
+
+        self.fields['username'].widget.attrs['class'] = 'form-control register-dokter'
+        self.fields['password1'].widget.attrs['class'] = 'form-control register-dokter'
+        self.fields['password2'].widget.attrs['class'] = 'form-control register-dokter'
+
+        for fieldname in ['username', 'password1', 'password2']:    
+            self.fields[fieldname].help_text = None
+
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -38,4 +62,7 @@ class DokterSignUpForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+
+
 
