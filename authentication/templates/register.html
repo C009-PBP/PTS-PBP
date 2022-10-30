@@ -1,19 +1,19 @@
 {% extends 'baseAuth.html' %}
 
+{% load static %}
+
 {% block meta %}
 <title>Registrasi Akun</title>
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
 {% endblock meta %}
 
 {% block content %}  
 
 
-<body>
-
     <div class="register-container justify-content-center align-self-center d-flex h-100">
         <div class = "register">
         
-            <h1>Formulir Registrasi</h1>  
-            <h3>Daftar sebagai:</h3>
+            <h1>Pilih role:</h1>  
             <a class="" href="{% url 'authentication:register_pasien' %}">Pasien</a>
 
             <a class="" href="{% url 'authentication:register_dokter' %}">Dokter</a>
@@ -25,7 +25,6 @@
 
     <a class="" href="{% url 'authentication:login' %}">Back</a>
 
-</body>
 
 
 {% endblock content %}

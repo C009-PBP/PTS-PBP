@@ -1,7 +1,10 @@
 {% extends 'baseAuth.html' %}
 
+{% load static %}
+
 {% block meta %}
 <title>Registrasi Akun</title>
+<link rel="stylesheet" href="{% static 'css/register_dokter.css' %}">
 {% endblock meta %}
 
 {% block content %}  
@@ -15,6 +18,7 @@
             <h1>Formulir Registrasi Dokter</h1>  
             
             <form method="POST" >  
+
                 {% csrf_token %}  
                 <table>  
                     {{ form.as_table }}  
@@ -27,16 +31,6 @@
         
         </div>  
             
-        <div>
-            {% if messages %}  
-            <ul>   
-                {% for message in messages %}  
-                    <li>{{ message }}</li> 
-                {% endfor %}  
-            </ul>   
-            {% endif %}  
-        </div>
-
     </div>
 
     

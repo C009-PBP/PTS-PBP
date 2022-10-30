@@ -1,0 +1,9 @@
+.register-dokter{
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+}
+
+ul.errorlist {
+    display:none;
+}
