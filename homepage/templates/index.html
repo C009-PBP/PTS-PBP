@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block meta %}
-<title>Hello, world!</title>
+<title>Homepage</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 {% endblock meta %}
@@ -54,5 +54,73 @@
   {% endif %}
   
   <h3>Welcome to HealthBud!</h3>
+  
+  <button>Kalkulator BMI</button>
+  <button>Pengaturan Akun</button>
+  <button>Info Dokter</button>
+  <button>Tanya Dokter</button>
+
+  <div class="container p-5">
+    <form method="POST" class="was-validated" id="form_review">
+        {% csrf_token %}
+        <div class="mb-3 mt-3">
+          <label for="review" class="form-label">Review:</label>
+          <input type="text" class="form-control" id="review" placeholder="Tuliskan review Anda" name="review" required>
+        </div>
+        <input type="submit" value="Submit Review" onclick="addReview()">
+    </form>
+  </div>
+
+  <div id="review_history">
+  </div>
+
+  
+  <script>
+    async function getReview() {
+        return fetch("{% url 'homepage:show_json' %}").then((res) => res.json())
+      }
+      
+    
+    async function refreshHomepage() {
+        
+      const review_objects = await getReview();
+      let htmlString = ''
+      review_objects.forEach((item) => {
+        htmlString += `\n
+        <div class="flex-container justify-content-center align-self-center d-flex h-100""">
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">${item.fields.date_created}</h5>
+              <p class="card-title">${item.fields.review}</h5>
+              <button type="button" id="button-delete" class="btn btn-primary" onclick="deleteReview(${item.pk})">Delete</button>
+            </div>
+          </div>
+        </div>
+        ` 
+      })
+      document.getElementById("review_history").innerHTML = htmlString
+    }
+  
+  
+    function addReview() {
+      console.log("TESaddd")
+      fetch("{% url 'homepage:add_review' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form_review'))
+        }).then(refreshHomepage)
+      return false
+    }
+
+    function deleteReview(reviewPK) {
+      console.log("TESzzz")
+      fetch(`homepage/delete/${reviewPK}`, {
+        method: "GET",
+        }
+        ).then(refreshHomepage)
+      return false
+    }
+  
+    refreshHomepage() 
+  </script>
 
 {% endblock content %}
