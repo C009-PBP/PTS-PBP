@@ -1,9 +1,15 @@
 # from dataclasses import fields
 from django import forms
-from .models import Forum
+from .models import Answer, Question
 
 
-class ForumForm(forms.ModelForm):
+class QuestionForm(forms.ModelForm):
     class Meta:
-        model = Forum
-        fields = ('specialization', 'title', 'question')
+        model = Question
+        fields = ('title', 'detail', 'tags')
+
+
+class AnswerForm(forms.ModelForm):
+    class Meta:
+        model = Answer
+        fields = ('detail', )
