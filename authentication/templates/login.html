@@ -1,29 +1,72 @@
-{% extends 'base.html' %}
+{% extends 'baseAuth.html' %}
 
 {% load static %}
 
 {% block meta %}
-<!-- <link rel="stylesheet" href="{% static 'css/login.css' %}"> -->
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
 <title>Login</title>
 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Manrope">
+<style>
+    *{
+        font-family: 'Manrope';
+    }
+
+/* .card{
+  padding: 15px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+} */
+</style>
 {% endblock meta %}
 
 {% block content %}
+<div class="login-body">
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-80">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card bg-dark text-white" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+  
+              <div class="mb-md-4 mt-md-4 pb-5">
 
-    <div class="login-container">
-            <div class="login-dark">
                 <form method="POST" action="">
-                    {% csrf_token %}
-                        <h2 class="sr-only">Login</h2>
-                        <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
-                        <div class="form-group"><input class="form-control"  name="username" placeholder="username"></div>
-                        <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password"></div>
-                        <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button></div>
-                </form>
+                {% csrf_token %}
+                    <h2 class="fw-bold mb-2 text-uppercase mb-5">Login</h2>
+    
+                    <div class="form-outline form-white mb-4">
+                    <label class="form-label" for="username">Username</label>
+                    <input type="text" id="username" name="username" class="form-control form-control-lg">
+                    
+                    </div>
+    
+                    <div class="form-outline form-white mb-4">
+                    <label class="form-label" for="typePasswordX">Password</label>
+                    <input type="password" id="password" name="password" class="form-control form-control-lg" />
+                    </div>
+    
+                    <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
 
+                </form>
+  
+              </div>
+  
+              <div>
+                <p class="mb-0">Belum mempunyai akun? <a href="{% url 'authentication:register' %}" class="text-white-50 fw-bold">Register</a>
+                </p>
+              </div>
+  
             </div>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
             
             {% if messages %}
                 <ul>
@@ -32,14 +75,12 @@
                     {% endfor %}
                 </ul>
             {% endif %}     
-
-            Belum mempunyai akun? <a href="{% url 'authentication:register' %}">Buat Akun</a>
                 
         
-        </div>
 
-    </div>
-    
+</div>
+
+
 
     <script>
     function register() {
