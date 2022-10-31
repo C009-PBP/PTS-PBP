@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'bmi_calculator',
     'info_dokter',
     'tanya_dokter'
-    # 'tanya_dokter.apps.TanyaDokterConfig',
 ]
 
 MIDDLEWARE = [

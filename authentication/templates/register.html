@@ -1,31 +1,102 @@
-{% extends 'base.html' %}
+{% extends 'baseAuth.html' %}
+
+{% load static %}
 
 {% block meta %}
 <title>Registrasi Akun</title>
+<link rel="stylesheet" href="{% static 'css/register_menu.css' %}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Manrope">
+<style>
+*{
+    font-family: 'Manrope';
+}
+body{
+    background-color: #221C35;
+}
+.register-container{
+  padding: 15px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+a:link, a:visited {
+    background-color: white;
+    color: black;
+    border: 2px solid #221C35;
+    border-radius: 10px;
+    padding: 20px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+  
+a:hover, a:active {
+    background-color: #4461F2;
+    color: aliceblue;
+}
+
+.row{
+    margin-bottom: 15px;
+}
+
+.row-select{
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+}
+
+h1{
+    color:aliceblue;
+}
+
+
+</style>
 {% endblock meta %}
 
 {% block content %}  
 
-
-<body>
-
-    <div class="register-container justify-content-center align-self-center d-flex h-100">
+<div>
+    <div class="register-container justify-content-center align-self-center d-flex">
         <div class = "register">
+            <div class="container px-4 text-center">
+                
+                <div class="row gx-5">
+                    <h1>
+                        Pilih role:
+                    </h1>
+                </div>
+                
+                <div class="row gx-5 row-select">
+                  <div class="col">
+                   <div class="p-3">
+                    <a class="pasien-select" href="{% url 'authentication:register_pasien' %}">Pasien</a>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="p-3">
+                        <a class="dokter-select" href="{% url 'authentication:register_dokter' %}">Dokter</a>
+                    </div>
+                  </div>
+                </div>
+               
+                <div class="row gx-5">
+                   
+                    <p><a class="" href="{% url 'authentication:login' %}">Kembali</a></p>
+                </div>
+              </div>
         
-            <h1>Formulir Registrasi</h1>  
-            <h3>Daftar sebagai:</h3>
-            <a class="" href="{% url 'authentication:register_pasien' %}">Pasien</a>
-
-            <a class="" href="{% url 'authentication:register_dokter' %}">Dokter</a>
+            
+            
 
         
         </div>  
             
     </div>
 
-    <a class="" href="{% url 'authentication:login' %}">Back</a>
-
-</body>
+</div>
 
 
 {% endblock content %}

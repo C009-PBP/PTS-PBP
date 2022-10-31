@@ -1,0 +1,17 @@
+body{
+    background-color : #221C35;
+}
+
+
+.card-body{
+    background-color: #4461F2;
+    border-radius: 10px;
+}
+
+.register-dokter{
+    margin:10px 0px 25px 0px;
+}
+
+/* ul.errorlist {
+    display:none;
+} */
