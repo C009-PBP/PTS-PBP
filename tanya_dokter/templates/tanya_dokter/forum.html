@@ -100,8 +100,15 @@
             <p>
                 by <a href="#" class="mr-2" style="text-decoration:none;">{{quest.user.username}}</a>
                 <div class="text-end">
-                <a href="#" class="mx-4" style="text-decoration:none;">{{quest.answer_set.count}} Answers</a>
-                <a href="#" class="" style="text-decoration:none;">{{quest.total_comments}} Comments</a>
+                  {% if quest.answer_set.count > 0 %}
+                  <p class="mx-4 text-muted">
+                    Answered<br>
+                    <a href="#" class="" style="text-decoration:none;">{{quest.total_comments}} Comments</a>
+                  </a>
+                  {% else %}
+                  <p class="mx-4 text-muted">Not Yet Answered</a>
+                  {% endif %}
+                  <br>
                 </div>
             </p>
         </div>
@@ -117,8 +124,10 @@
     <nav class="my-3 container">
         <ul class="pagination">
             {% if quests.has_previous %}
-          <li class="page-item"><a class="page-link" href="?page={{quests.previous_page_number}}">Previous</a></li>
-          {% endif %}
+          <li class="page-item"><a class="page-link" href="?page={{quests.previous_page_number}}"><<</a></li>
+            {% else %}
+          <li class="page-item"><a class="page-link btn btn-info disabled"><<</a></li>
+            {% endif %}
           {% for i in quests.paginator.page_range %}
           {% if quests.number == i %}
           <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
@@ -127,7 +136,9 @@
           {% endif %}
           {% endfor %}
           {% if quests.has_next %}
-          <li class="page-item"><a class="page-link" href="?page={{quests.next_page_number}}">Next</a></li>
+          <li class="page-item"><a class="page-link" href="?page={{quests.next_page_number}}">>></a></li>
+          {% else %}
+          <li class="page-item"><a class="page-link btn btn-info disabled" href="">>></a></li>
           {% endif %}
         </ul>
       </nav>

@@ -45,6 +45,8 @@
                     console.log(res)
                     if (res.bool){
                         $(".comment-text").val('');
+                        $(".count-comment").text('++ New Comment(s) Added');
+                        
                         //append element
                         var _html = '<div class="card mb-2 animate__animated animate__headShake"> \
                             <div class="card-body"> \
@@ -161,7 +163,7 @@
                     {{ answer.detail }} <br>
                     {{ quest.add_time|naturaltime}}
                 </p>
-                <p class="text-end">
+                <p class="count-comment text-end">
                     <i class="bi bi-chat-dots"></i>   
                     {{answer.comment_set.count}} comments
                 </p>
