@@ -7,3 +7,4 @@ class Review(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, db_constraint=False, null=True, blank=True)
     date_created = models.DateField()
     review = models.TextField()
+    username = models.TextField(default="")
