@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Info Dokter</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock meta %}
+{% block content %}
+
+<table class="table table-primary table-striped table-bordered">
+    <tr>
+    <th class="table-dark text-center">Nama Dokter</th>
+    <th class="table-dark text-center">Hari Praktek</th>
+    <th class="table-dark text-center">Jadwal Praktek</th>
+    <th class="table-dark text-center">Review</th>
+    </tr>
+    <tbody class="table-group-divider">
+    ...
+    {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
+    {% for info in list_info %}
+    <tr class="text-center">
+        <th>{{info.nama_dokter}}</th>
+        <th>{{info.hari_praktek}}</th>
+        <th>{{info.jadwal_praktek}}</th>
+        
+        <th>
+        {% for x in list_review%}
+        {% if x.dokter.nama_dokter == info.nama_dokter%}
+            {{x.review}}<br> 
+        {% endif %}
+        {% endfor %}
+        </th>
+    </tr>
+    {% endfor %}
+</table>
+
+<div class="container-fluid">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Add Review
+    </button>
+  </div>
+  <!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Review</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addReview" action="add/" method="POST">
+            {% csrf_token %}
+            <select name="Pilih Dokter">
+                <option value="0">Pilih Dokter</option>
+                <option value="1">dr. Eveline Panjaitan, SpA</option>
+                <option value="2">dr. Irman, SpAk</option>
+                <option value="3">dr. Yoan Catherina, SpAn</option>
+                <option value="4">dr. Iskandar R. Budianto, Sp.B - Sp.BA</option>
+                <option value="5">dr. Bagus Pramantha, SpOT</option>
+
+            </select>
+                <p>Review:</p>
+                <textarea cols="100" rows="10" name="Review" placeholder="Review" style="max-width: 100%;"></textarea><br/>
+                
+            <div style="margin: 10px auto;">
+                <input class="btn btn-primary" type="submit" name="submit" value="Add">
+            </div>
+  
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row" style="margin-left:10px; margin-right:10px" id="data">
+  </div>
+{% endblock content %}
