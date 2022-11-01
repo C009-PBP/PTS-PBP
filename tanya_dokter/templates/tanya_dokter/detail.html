@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load humanize %}
 
 {% block meta %}
 <script src="https://code.jquery.com/jquery-3.5.0.min.js"
@@ -12,7 +13,60 @@
         crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function(){
+        $(".save-comment").click(function(){
+        
+            var _comment = $(".comment-text").val();
+            var _answerid = $(this).data('answer'); //this = .save-comment
+            //ajax 
+            $.ajax({
+                url: "{% url 'tanya_dokter:save-comment' %}",
+                type: "post",
+                data: {
+                    comment: _comment,
+                    answerid: _answerid,
+                    csrfmiddlewaretoken:'{{ csrf_token }}'
+                },
+                dataType: 'json',
+
+                beforeSend: function(){
+                    console.log("before")
+                    $(".save-comment").addClass('disabled').text('Saving...');
+                },
+
+                success: function(res){
+                    console.log(res)
+                    if (res.bool){
+                        $(".comment-text").val('');
+                        $(".count-comment").text('++ New Comment(s) Added');
+                        
+                        //append element
+                        var _html = '<div class="card mb-2 animate__animated animate__headShake"> \
+                            <div class="card-body"> \
+                                <p> '+_comment+'</p> \
+                                <p> \
+                                    by <a href="#" class="mr-3">{{request.user}}</a> \
+                                </p> \
+                            </div> \
+                        </div>';
+                    
+                    $(".comment-wrapper").append(_html);
+                    }
+                    $(".save-comment").removeClass('disabled').text('Submit');
+
+                }  
+            });
+        });
+    
+});
+</script>
 
 
 {% endblock meta %}
@@ -75,74 +129,97 @@
     </nav>  
 
  <!-- Search Section -->
- <div class="container py-5">
-    <div class="row">
-        <div class="col-md-8 offset-2">
-            <form>
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control form-control-lg" placeholder="Search" />
-                    <div class="input-group-append">
-                    <button class="btn btn-dark btn-lg" type="submit" id="button-addon2">Search</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+
 
 <!-- Question List -->
 <div class="container">
-    {% for quest in quests %}
-    <div class="card mb-3 shadow" style="width:800px; margin: auto;">
-        <div class="card-body">
-            <h4 class="card-title"><a href="detail/{{quest.id}}">{{quest.title}}</a></h4>
-            <p class="card-text">{{quest.detail}}</p>
-            <p>
-                by <a href="#" class="mr-2" style="text-decoration:none;">{{quest.user.username}}</a>
-                <div class="text-end">
-                  {% if quest.answer_set.count > 0 %}
-                  <p class="mx-4 text-muted">
-                    Answered<br>
-                    <a href="#" class="" style="text-decoration:none;">{{quest.total_comments}} Comments</a>
-                  </a>
-                  {% else %}
-                  <p class="mx-4 text-muted">Not Yet Answered</a>
-                  {% endif %}
-                  <br>
-                </div>
-            </p>
-        </div>
-        <div class="card-footer">
-            <small>{{quest.add_time}}</small>
-        </div>
+    <div class="col-11">
+        <h2 class="my-3">{{quest.title}}</h2>
+        <p>
+            Posted by <a href="#" style="text-decoration:none;">{{quest.user.username}}</a>,
+            <span class="ml-12">{{quest.add_time|date:'d/m/Y'}}</span>
+        </p>
+        <p>"{{quest.detail}}"</p>
+        <p>{{quest.add_time|naturaltime}}</p>
+        <p>
+            tags:
+            {% for tag in tags %}
+                <a href="#" class="badge bg-secondary" style="text-decoration:none;">{{tag}}</a>
+            {% endfor %}
+        </p>
     </div>
-    {% endfor %}
+
+    {% if answers.exists %}
+        <!--Answers-->
+        {% for answer in answers %}
+        <div class="comment-wrapper">
+            <div class="card p-2 border border-primary border-opacity-50 animate__animated animate__headShake">
+                <p>
+                    <!--belom handle href untuk user DOKTER dibawah ini-->
+                    Dijawab oleh: <a href="#" class="mr-3" style="text-decoration:none;">{{answer.user.username}}</a>,
+                    <span class="ml-12">{{quest.add_time|date:'d/m/Y'}}</span>
+                </p>
+                <p>
+                    {{ answer.detail }} <br>
+                    {{ quest.add_time|naturaltime}}
+                </p>
+                <p class="count-comment text-end">
+                    <i class="bi bi-chat-dots"></i>   
+                    {{answer.comment_set.count}} comments
+                </p>
+            </div>
+            <!--Comments-->
+            <h3 class="my-4" id="comment-header">Comments</h3>
+            {% for comment in answer.comment_set.all %}
+            <div class="card mb-2">
+                <div class="card-body">
+                    <p>
+                    {{comment.comment}}
+                    </p>
+                    <p>
+                        by <a href="#" class="mr-3">{{comment.user}}</a>
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% if user.is_authenticated %}
+        <!-- Comment Form-->
+        <div class="card">
+            <h6 class="card-header">Add Comment</h6>
+            <div class="card-body">
+                <textarea class="form-control comment-text" rows="4" cols="50" placeholder="Comment here"></textarea>
+                <button type="button" data-answer="{{answer.id}}" class="btn btn-primary my-3 save-comment">Submit</button>
+            </div>
+        </div>
+        {% endif %}
+        {% csrf_token %}
+        {% endfor %}
+
+
+    {% else %}
+        <!-- Answer Form -->
+        <p class="text-end">*Not yet answered*</p>
+        {% if user.is_authenticated %}
+        <form method="POST">  
+            {% csrf_token %}
+            <div class="card">
+                <h6 class="card-header">Jawaban : </h6>
+                <div class="card-body">
+                    {{ answerform.detail }}
+                    <br><input type="submit" class="btn btn-primary">
+                </div>
+            </div>
+        <form>
+        
+        {% endif %}
+
+
+    {% endif %}
+
 </div>
 
-{% if quests.has_other_pages %}
-    <!-- Pagination -->
-    <nav class="my-3 container">
-        <ul class="pagination">
-            {% if quests.has_previous %}
-          <li class="page-item"><a class="page-link" href="?page={{quests.previous_page_number}}"><<</a></li>
-            {% else %}
-          <li class="page-item"><a class="page-link btn btn-info disabled"><<</a></li>
-            {% endif %}
-          {% for i in quests.paginator.page_range %}
-          {% if quests.number == i %}
-          <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
-          {% else %}
-          <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
-          {% endif %}
-          {% endfor %}
-          {% if quests.has_next %}
-          <li class="page-item"><a class="page-link" href="?page={{quests.next_page_number}}">>></a></li>
-          {% else %}
-          <li class="page-item"><a class="page-link btn btn-info disabled" href="">>></a></li>
-          {% endif %}
-        </ul>
-      </nav>
-{% endif %}
+
 
 <!-- Question List
 <div class="container">

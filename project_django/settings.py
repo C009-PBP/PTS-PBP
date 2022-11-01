@@ -39,13 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'authentication',
     'homepage',
     'pengaturan_akun',
     'bmi_calculator',
     'info_dokter',
     'tanya_dokter'
-    # 'tanya_dokter.apps.TanyaDokterConfig',
 ]
 
 MIDDLEWARE = [
