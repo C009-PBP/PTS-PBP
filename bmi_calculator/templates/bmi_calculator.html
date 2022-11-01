@@ -25,7 +25,7 @@
       <br><br><br><br>
       <h1 class="display-4 fw-normal"><b>Apa itu <span id="BMI-text">BMI?</span></b></h1>
       <p class="lead fw-normal">BMI (Body Mass Index) merupakan suatu hasil perhitungan yang dapat digunakan untuk mengukur <i>body fat</i> atau persentase lemak pada tubuh. Perhitungan dapat dilakukan dengan membagi berat dengan kuadrat dari tinggi tubuh.</p>
-      <a class="btn btn-primary" href="#cek-bmi">Cek BMI saya</a>
+      <a class="btn btn-primary btn-edit" href="#cek-bmi">Cek BMI saya</a>
     </div>
   </div>
 
@@ -59,7 +59,7 @@
                     {{form_bmi.tinggi}}
                   </div>
                   
-                  <input type="button" class="btn btn-primary" onclick="addBMI()" value="Cek BMI">
+                  <input type="button" class="btn btn-primary btn-bmi" onclick="addBMI()" value="Cek BMI">
               </form>
            </div>
           </div>
@@ -74,7 +74,7 @@
 
       <!-- Button trigger modal -->
   <div class="text-center"> 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalLong" onclick="viewBMIHistory()">
+    <button type="button" class="btn btn-primary btn-bmi" data-bs-toggle="modal" data-bs-target="#exampleModalLong" onclick="viewBMIHistory()">
       Lihat Histori BMI
     </button>
   </div>
@@ -113,7 +113,7 @@
       <div class="my-3 py-3 pt-5 mt-5">
         <h3 class="display-6">BMI bukanlah alat pengukur yang pasti.</h2>
         <p class="lead">Kalkulator BMI tidak sepenuhnya dapat memprediksi status kesehatanmu. Tanyalah dokter profesional untuk mendapatkan informasi yang relatif lebih akurat dan optimal!</p>
-        <input type="button" class="btn btn-primary" onclick="" value="Tanya dokter">
+        <a class="tanya-dokter btn-edit" href="#">Tanya dokter</a>
       </div>
     </div>
   </div>
