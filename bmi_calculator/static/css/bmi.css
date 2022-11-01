@@ -1,6 +1,11 @@
-h1{
-    color:blue;
+html {
+    scroll-behavior: smooth;
+  }
+
+*{
+    font-family: 'Manrope';
 }
+
 
 .form-group{
     align-items: center;
@@ -9,3 +14,58 @@ h1{
     align-self: auto;
 }
 
+.container {
+    max-width: 960px;
+  }
+  /*
+   * Extra utilities
+   */
+  @media (min-width: 768px) {
+    .flex-md-equal > * {
+      flex: 1;
+    }
+  }
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+.prolog{
+    background-image: url('../images/national-cancer-institute-NFvdKIhxYlU-unsplash\ 1.png');
+    background-color: rgb();
+    display: cover;
+    background-repeat: no-repeat;
+    background-size:cover;
+    height: 800px;
+}
+
+/* 
+@media(max-width:1200px){
+.doctor-cartoon{
+    iamge
+}
+} */
+
+.doctor-cartoon{  
+    left: 0px;
+}
+
+.bg-mid{
+    background-color:white;
+}
+
+.img-doctor{
+    background-image: url('../images/_0046 1 1.png');
+    height: 700px;
+    display:flex;
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+
+.top-text{
+    color: white;
+}
+
+#BMI-text{
+    color:#4461F2
+}

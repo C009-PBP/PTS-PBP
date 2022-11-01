@@ -22,7 +22,12 @@ async function showNewBMIResult(){
     htmlString += `\n
     <h3>Hasil BMI terakhir Anda: ${bmi_object[lastIndex].fields.bmi_result}</h3>
     <h3>Status: ${bmi_object[lastIndex].fields.deskripsi_hasil}</h3>
-    <h5 class="card-title">Catatan: ${bmi_object[lastIndex].fields.keterangan_tambahan}</h5>
+    <h3> Disubmit tanggal: ${bmi_object[lastIndex].fields.date_created}</h3> 
+    `;
+  }else{
+    htmlString += `\n
+    <h3>Hasil BMI terakhir Anda: - </h3>
+    <h3>Status: Belum diketahui </h3>
     `;
   }
   document.getElementById("bmi_result").innerHTML = htmlString;
@@ -42,7 +47,7 @@ async function viewBMIHistory(){
       <div class="flex-container justify-content-center align-self-center d-flex h-100""">
         <div class="card" style="width: 18rem;">
           <div class="card-body">
-            <h5 class="card-title">${item.fields.date_created}</h5>
+            <h5 class="card-title">Tanggal: ${item.fields.date_created}</h5>
             <h5 class="card-title">BMI: ${item.fields.bmi_result}</h5>
             <h5 class="card-title">Deskripsi: ${item.fields.deskripsi_hasil}</h5>
           </div>
