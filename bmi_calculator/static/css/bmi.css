@@ -31,7 +31,7 @@ html {
 }
 
 .prolog{
-    background-image: url('../images/national-cancer-institute-NFvdKIhxYlU-unsplash\ 1.png');
+    background-image: url('../images/national-cancer-institute-NFvdKIhxYlU-unsplash.png');
     background-color: rgb();
     display: cover;
     background-repeat: no-repeat;
@@ -68,4 +68,20 @@ html {
 
 #BMI-text{
     color:#4461F2
+}
+
+.btn-edit:link, .btn-edit:visited {
+    background-color: white;
+    color: black;
+    border: 2px solid #221C35;
+    border-radius: 10px;
+    padding: 20px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+  
+.btn-edit:hover, .btn-edit:active {
+    background-color: #4461F2;
+    color: aliceblue;
 }
