@@ -12,6 +12,8 @@ html {
     text-align: center;
     align-content: center;
     align-self: auto;
+
+    
 }
 
 .container {
@@ -31,12 +33,13 @@ html {
 } */
 
 .prolog{
-    background-image: url('../images/national-cancer-institute-NFvdKIhxYlU-unsplash.png');
-    background-color: rgb();
+    background-image: url('../images/national-cancer-institute-NFvdKIhxYlU-unsplash0.jpg');
     display: cover;
     background-repeat: no-repeat;
     background-size:cover;
     height: 800px;
+
+
 }
 
 /* 
