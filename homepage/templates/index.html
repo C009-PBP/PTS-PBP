@@ -1,19 +1,251 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block meta %}
-<title>Hello, world!</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+<head>
+  <title>Homepage</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Manrope">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 {% endblock meta %}
 
+{% block style %}
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+
+*{
+    font-family: 'Manrope';
+}
+
+
+.form-group{
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    align-self: auto;
+}
+
+.container {
+    max-width: 960px;
+  }
+  /*
+   * Extra utilities
+   */
+  @media (min-width: 768px) {
+    .flex-md-equal > * {
+      flex: 1;
+    }
+  }
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+.prolog{  
+    background-color: rgb();
+    display: cover;
+    background-repeat: no-repeat;
+    background-size:cover;
+    height: 800px;
+}
+
+/* 
+@media(max-width:1200px){
+.doctor-cartoon{
+    iamge
+}
+} */
+
+.doctor-cartoon{  
+    left: 0px;
+}
+
+.bg-mid{
+    background-color:white;
+}
+
+.img-doctor{
+    background-image: url('../images/_0046 1 1.png');
+    height: 700px;
+    display:flex;
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+
+.top-text{
+    color: white;
+}
+
+#BMI-text{
+    color:#4461F2
+}
+
+.btn-edit:link, .btn-edit:visited {
+    background-color: white;
+    color: black;
+    border: 2px solid #221C35;
+    border-radius: 10px;
+    padding: 20px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+  
+.btn-edit:hover, .btn-edit:active {
+    background-color: #4461F2;
+    color: aliceblue;
+}
+</style>
+<script src="https://kit.fontawesome.com/ff49bbe5ae.js" crossorigin="anonymous"></script>
+{% endblock style %}
+
 {% block content %}
-
-
+<body>
   {% if request.user.is_authenticated %}
     <h1>Halo, {{user.get_username}}</h1>
   {% endif %}
   
-  <h3>Welcome to HealthBud!</h3>
+  <h3 class="position-relative overflow-hidden p-3 p-md-1 m-md text-center bg-light prolog" >Welcome to HealthBud!</h3>
+  <div class="position-relative overflow-hidden p-3 p-md-5 m-md text-center bg-light prolog">
+    <div class="col-md-5 p-lg-5 mx-auto my-1 left-text">
+      <br><br><br><br>
+      <h1 class="display-4 fw-normal"><b>Apa itu <span>HealthBud?</span></b></h1>
+      <p class="lead fw-normal">HealthBud merupakan aplikasi yang dibuat untuk mendukung pengadaan fasilitas kesehatan yang efektif dan efisien.</p>
+    </div>
+  </div>
+  <button><a href="{% url 'bmi_calculator:show_bmi_calculator' %}">Kalkulator BMI</a></button>
+  <button><a href="{% url 'pengaturan_akun:show_profile' %}">Pengaturan Akun</a></button>
+  <button><a href="{% url 'tanya_dokter:ask-question' %}">Info Dokter</a></button>
+  <button><a href="{% url 'tanya_dokter:home' %}">Tanya Dokter</a></button>
 
+  <div class="container p-5">
+    <form method="POST" class="was-validated" id="form_review">
+        {% csrf_token %}
+        <div class="mb-3 mt-3">
+          <label for="review" class="form-label">Review:</label>
+          <input type="text" class="form-control" id="review" placeholder="Tuliskan review Anda" name="review" required>
+        </div>
+        <input type="submit" value="Submit Review" onclick="addReview()">
+    </form>
+  </div>
+
+  <div id="review_history">
+  </div>
+
+  
+  <script>
+    async function getReview() {
+        return fetch("{% url 'homepage:show_json' %}").then((res) => res.json())
+      }
+      
+    
+    async function refreshHomepage() {
+        
+      const review_objects = await getReview();
+      let htmlString = ''
+      review_objects.forEach((item) => {
+        htmlString += `\n
+        <div class="card-group">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">${item.fields.username}</h5>
+              <p class="card-text">${item.fields.review}</p>
+              <button type="button" id="button-delete" class="btn btn-light" onclick="deleteReview(${item.pk})">🗑️</button>
+            </div>
+          </div>
+        </div>
+        ` 
+      })
+      document.getElementById("review_history").innerHTML = htmlString
+    }
+  
+  
+    function addReview() {
+      console.log("TESaddd")
+      fetch("{% url 'homepage:add_review' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form_review'))
+        }).then(refreshHomepage)
+      return false
+    }
+
+    function deleteReview(bmiPK) {
+      // console.log("TESzzz")
+      fetch(`/delete/${bmiPK}`, {
+        method: "GET",
+        }
+        ).then(refreshHomepage)
+      return false
+    }
+  
+    refreshHomepage() 
+  </script>
+</body>
+
+<footer class="text-center text-white" style="background-color: #f1f1f1;">
+  <!-- Grid container -->
+  <div class="container pt-4">
+    <!-- Section: Social media -->
+    <section class="mb-4">
+      <!-- Facebook -->
+      <a
+        class="btn btn-link btn-floating btn-lg text-dark m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fa fa-facebook-f"></i
+      ></a>
+
+      <!-- Twitter -->
+      <a
+        class="btn btn-link btn-floating btn-lg text-dark m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fa fa-twitter"></i
+      ></a>
+
+      <!-- Google -->
+      <a
+        class="btn btn-link btn-floating btn-lg text-dark m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fa fa-google"></i
+      ></a>
+
+      <!-- Instagram -->
+      <a
+        class="btn btn-link btn-floating btn-lg text-dark m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fa fa-instagram"></i
+      ></a>
+      <!-- Github -->
+      <a
+        class="btn btn-link btn-floating btn-lg text-dark m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fa fa-github"></i
+      ></a>
+    </section>
+    <!-- Section: Social media -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <p class="text-dark">Created By C009-PBP-2022</p>
+  </div>
+  <!-- Copyright -->
+</footer>
 {% endblock content %}
