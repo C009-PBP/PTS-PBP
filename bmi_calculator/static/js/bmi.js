@@ -1,15 +1,9 @@
-$("div.lazy").lazyload({
-  effect : "fadeIn"
-});
-
-
 async function getBMI() {
     return fetch("/bmi_calculator/json").then((res) => res.json())
   }
 
 
  function addBMI() {
-  console.log("TESaddd")
   fetch(`/bmi_calculator/add/`, {
         method: "POST",
         body: new FormData(document.querySelector('#form_bmi'))
@@ -18,7 +12,6 @@ async function getBMI() {
 }
 
 async function showNewBMIResult(){
-  console.log("tes showNewBMIResult");
 
   const bmi_object = await getBMI(); 
   let lastIndex = bmi_object.length - 1;
@@ -36,7 +29,7 @@ async function showNewBMIResult(){
     `;
   }
   document.getElementById("bmi_result").innerHTML = htmlString;
-  console.log("GG")
+
 }
 
 
@@ -45,7 +38,6 @@ async function showNewBMIResult(){
 async function viewBMIHistory(){
     
     const bmi_objects = await getBMI();
-    console.log("TESSSSSSSS" + " " + bmi_objects);
     let htmlString = ''
     bmi_objects.forEach((item) => {
       htmlString += `\n
@@ -68,7 +60,6 @@ async function viewBMIHistory(){
 }
 
 function deleteBMI(bmiPK) {
-  // console.log("TESzzz")
   fetch(`/bmi_calculator/delete/${bmiPK}`, {
     method: "GET",
     }
