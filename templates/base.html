@@ -9,6 +9,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
+  <link rel="icon" type="image/gif/png" href="../static/images/Frame 34_0.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&display=swap" rel="stylesheet">
@@ -47,7 +48,7 @@
     height: 80px;
     left: 0px;
     padding-top:10px;">
-  <div class="container-fluid" style="">
+  <div class="container-fluid">
   <a href="{% url 'homepage:index' %}" class="navbar-brand logo" 
     style="
     width: 100px;
@@ -93,6 +94,7 @@
         <ul class="dropdown-menu">
         <li><a class="dropdown-item" href="{% url 'bmi_calculator:show_bmi_calculator' %}" style="color: #121212;">Kalkulator BMI</a></li>
         <li><a class="dropdown-item" href="{% url 'tanya_dokter:home' %}" style="color: #121212;">Forum</a></li>
+        <li><a class="dropdown-item" href="{% url 'pengaturan_akun:show_profile' %}" style="color: #121212;">Pengaturan Akun</a></li>
         </ul>
       </li>
     </ul>
