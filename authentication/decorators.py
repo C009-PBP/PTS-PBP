@@ -15,13 +15,13 @@ def pasien_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, logi
 
     
 
-    print("TES DECORATOR PASIEN")
+    # print("TES DECORATOR PASIEN")
 
     if function:
-        print("TES DECORATOR IN FUNCTION PASIEN")
+        # print("TES DECORATOR IN FUNCTION PASIEN")
         return actual_decorator(function)
 
-    print("TES DECORATOR AFTER FUNCTION PASIEN")
+    # print("TES DECORATOR AFTER FUNCTION PASIEN")
     return actual_decorator
 
 
@@ -36,9 +36,9 @@ def dokter_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, logi
         redirect_field_name=redirect_field_name
     )
 
-    print("TES DECORATOR DOKTER")
+    # print("TES DECORATOR DOKTER")
     if function:
-        print("TES DECORATOR IN FUNCTION DOKTER")
+        # print("TES DECORATOR IN FUNCTION DOKTER")
         return actual_decorator(function)
-    print("TES DECORATOR AFTER FUNCTION DOKTER")
+    # print("TES DECORATOR AFTER FUNCTION DOKTER")
     return actual_decorator

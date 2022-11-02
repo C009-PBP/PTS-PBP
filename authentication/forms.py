@@ -34,7 +34,7 @@ class PasienSignUpForm(UserCreationForm):
         user.is_pasien = True
         user.save()
         # pasien = Pasien.objects.create(user=user)
-        print("TES CREATE PASIEN")
+        # print("TES CREATE PASIEN")
         return user
 
 

@@ -24,7 +24,7 @@
 <link rel="stylesheet" href=
 "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function(){
         $(".save-comment").click(function(){
@@ -151,6 +151,7 @@
 
     {% else %}
         <!-- Answer Form -->
+      {% if user.is_dokter%}
         <p class="text-end">*Not yet answered*</p>
         {% if user.is_authenticated %}
         <form method="POST">  
@@ -165,6 +166,17 @@
         <form>
         
         {% endif %}
+      {% else %}
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Jawaban belum tersedia</h5>
+          <p class="card-text text-danger">Dokter ahli akan segera menjawab pertanyaan ini. Mohon tunggu beberapa saat lagi.</p>
+          <a href="{% url 'tanya_dokter:home' %}" class="btn btn-primary">Kembali</a>
+        </div>
+      </div>
+
+      {% endif %}
 
 
     {% endif %}

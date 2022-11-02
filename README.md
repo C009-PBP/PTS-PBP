@@ -13,7 +13,7 @@ HealthBud merupakan aplikasi yang dibuat untuk mendukung pengadaan fasilitas kes
 
 - Homepage (Fikri)
 
-HealthBud tentunya akan mempunyai tampilan utama, di mana  semua akses untuk menuju modul lainnya akan terdapat di homepage. Ketika user sudah selesai melakukan login, maka tampilan yang terlihat akan menuju homepage. Di homepage nantinya, selain ada tombol untuk mengakses modul yang lain, maka akan terdapat juga kolom untuk menulis review dari user tentang aplikasi HealthBud. Nantinya, semua reviews dari user akan bisa dilihat di homepage, tidak hanya review dari akun yang sedang login.
+HealthBud tentunya akan mempunyai tampilan utama, di mana  semua akses untuk menuju modul lainnya akan terdapat di homepage. Ketika user sudah selesai melakukan login, maka tampilan yang terlihat akan menuju homepage. Di homepage nantinya, selain ada tombol untuk mengakses modul yang lain, akan terdapat kolom untuk menulis review dari user tentang aplikasi HealthBud. Nantinya, semua reviews dari user akan bisa dilihat di homepage, tidak hanya review dari akun yang sedang login.
 
 - Kalkulator BMI (Ardhito)
 
@@ -25,7 +25,7 @@ Di halaman pengaturan akun HealthBud, user dapat melengkapi data diri dan melaku
 
 - Jadwal praktek dokter + review dokter (Reza)
 
-App HealthBud ini manfaatnya mempermudah user untuk mencari jadwal praktek dokter dan mencari informasi rumah sakit terdekat yang ada di jadwal praktek dokter. Di dalam app Healthbud ini nanti terdapat tabel. Isi tabel tersebut ada hari tanggal bulan tahun, kemudian nama dokter, jadwal praktek dokter hari tanggal bulan tahun serta jam praktek dan tempat dokter itu praktek yang terakhir ada review dokter yang isinya adalah review dari pasien setelah konsul ke dokter tersebut. Untuk implementasi ajax terdapat pada fitur review dokter untuk input form.
+Salah satu tujuan dari aplikasi HealthBud ialah untuk mempermudah user mencari jadwal praktek dokter. Jadwal tersebut direpresentasikan dengan menggunakan tabel yang mengandung nama dokter, hari dan jam dokter tersebut praktik. Selain itu, user juga dapat mengirimkan review terhadap dokter.
 
 - Tanya Dokter (Safa)
 
@@ -40,16 +40,16 @@ Di dalam aplikasi ini, Implementasi AJAX dilakukan untuk mengambil input *form* 
 
 
 ## Daftar modul yang akan diimplementasikan:
-* Login (username+pass) + register biasa
+* Authentication (untuk membedakan jenis user, melakukan register, dan login) --> Dhito
 * Form pendaftaran client/pengaturan akun (riwayat kesehatan, dll) -> Nasya
 * Kalkulator BMI -> Dhito
 * Jadwal praktek dokter + review dokter -> Reza
 * Tanya jawab dokter (Forum) -> Safa
-* Homepage (formnya → review dari pasien ke aplikasi kita), terus nanti bisa kayak ada tampilan reviews dari usernya -> Fikri
+* Homepage (mengandung review dari pasien menuju aplikasi)-> Fikri
 
 
 ## Role atau peran pengguna beserta deskripsinya (karena bisa saja lebih dari satu jenis pengguna yang mengakses aplikasi):
 
-Pada implementasi aplikasi kami, jenis pengguna yang akan dapat menggunakan app ini adalah pasien dan dokter. Pasien harus login terlebih dahulu untuk dapat menggunakan app ini. Setelah berhasil masuk, Pasien akan ter-direct ke halaman homepage. Setelahnya, di homepage akan ditampilkan akses ke dalam modul yang lain, seperti Kalkulator BMI, Pengaturan akun (Isi profil), jadwal praktik dan review dokter, serta Tanya Dokter.
+Pada implementasi aplikasi kami, jenis pengguna yang akan dapat menggunakan app ini adalah pasien dan dokter. Pasien harus login terlebih dahulu untuk dapat menggunakan app ini. Setelah berhasil masuk, Pasien akan ter-direct ke halaman homepage. Setelahnya, di homepage akan ditampilkan akses ke dalam modul yang lain, seperti Kalkulator BMI, Pengaturan Akun (isi profil), Info Dokter, serta Tanya Dokter.
 
-Untuk dokter, login juga perlu dilakukan terlebih dahulu. Setelah berhasil masuk, Dokter akan ter-direct ke halaman homepage. Di homepage, akan ditampilkan akses ke dalam modul yang lain, seperti Pengaturan akun (Isi profil), jadwal praktik dan review dokter, serta Tanya Dokter.
+Untuk dokter, login juga perlu dilakukan terlebih dahulu. Setelah berhasil masuk, Dokter akan ter-direct ke halaman homepage. Di homepage, akan ditampilkan akses ke dalam modul yang lain. Namun, user dengan tipe dokter tidak dapat mengakses aplikasi kalkulator BMI (diperuntukkan khusus untuk pasien). 

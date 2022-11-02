@@ -4,20 +4,12 @@
 
 {% block meta %}
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Manrope">
 <link rel="stylesheet" href="{% static 'css/bmi.css' %}">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" async src="{% static '/js/bmi.js' %}"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="shortcut icon" href="#">
 {% endblock meta %}
 
-
-
 {% block content %}
-
-
 
 <main>
   <div class="position-relative overflow-hidden p-3 p-md-5 m-md text-center bg-light prolog">
@@ -37,7 +29,8 @@
         <div class="card text-center">
           <div class="card-header">
             <div id="bmi_result">
-  
+              <h3>Hasil BMI Anda: - </h3>
+              <h3>Status: Belum diketahui </h3>
             </div>
         
           </div>
@@ -113,70 +106,9 @@
       <div class="my-3 py-3 pt-5 mt-5">
         <h3 class="display-6">BMI bukanlah alat pengukur yang pasti.</h2>
         <p class="lead">Kalkulator BMI tidak sepenuhnya dapat memprediksi status kesehatanmu. Tanyalah dokter profesional untuk mendapatkan informasi yang relatif lebih akurat dan optimal!</p>
-        <a class="tanya-dokter btn-edit" href="#">Tanya dokter</a>
+        <a class="tanya-dokter btn-edit" href="{% url 'tanya_dokter:ask-question' %}">Tanya dokter</a>
       </div>
     </div>
   </div>
-
-
-  <footer class="text-center text-white" style="background-color: #f1f1f1;">
-    <!-- Grid container -->
-    <div class="container pt-4">
-      <!-- Section: Social media -->
-      <section class="mb-4">
-        <!-- Facebook -->
-        <a
-          class="btn btn-link btn-floating btn-lg text-dark m-1"
-          href="#!"
-          role="button"
-          data-mdb-ripple-color="dark"
-          ><i class="fa fa-facebook-f"></i
-        ></a>
-  
-        <!-- Twitter -->
-        <a
-          class="btn btn-link btn-floating btn-lg text-dark m-1"
-          href="#!"
-          role="button"
-          data-mdb-ripple-color="dark"
-          ><i class="fa fa-twitter"></i
-        ></a>
-  
-        <!-- Google -->
-        <a
-          class="btn btn-link btn-floating btn-lg text-dark m-1"
-          href="#!"
-          role="button"
-          data-mdb-ripple-color="dark"
-          ><i class="fa fa-google"></i
-        ></a>
-  
-        <!-- Instagram -->
-        <a
-          class="btn btn-link btn-floating btn-lg text-dark m-1"
-          href="#!"
-          role="button"
-          data-mdb-ripple-color="dark"
-          ><i class="fa fa-instagram"></i
-        ></a>
-        <!-- Github -->
-        <a
-          class="btn btn-link btn-floating btn-lg text-dark m-1"
-          href="#!"
-          role="button"
-          data-mdb-ripple-color="dark"
-          ><i class="fa fa-github"></i
-        ></a>
-      </section>
-      <!-- Section: Social media -->
-    </div>
-    <!-- Grid container -->
-  
-    <!-- Copyright -->
-    <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      <p class="text-dark">Created By C009-PBP-2022</p>
-    </div>
-    <!-- Copyright -->
-  </footer>
 
 {% endblock content %}
