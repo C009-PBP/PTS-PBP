@@ -40,7 +40,7 @@
         <div class="modal-dialog modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Pengaturan Akun</h5>
+                    <h5 class="modal-title" id="editModalLabel">Edit Profile</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                     <div class="modal-body">
@@ -76,14 +76,14 @@
             <h4 class="card-title my-2 my-md-0">Riwayat Kesehatan</h4>
             {% load static %} <img src="{% static '/img/edit_record.svg' %}" alt="" width="300" height="300" class="img-fluid">
             <div class="my-2">
-                <button type="button" class="btn btn-primary" onclick="location.href='/pengaturan_akun/med_record'">Lihat Riwayat Kesehatan</button>
+                <button type="button" class="btn btn-primary" disabled>Lihat Riwayat Kesehatan</button>
+                <p class="h7">Mohon maaf, fitur ini hanya dapat diakses oleh Pasien.</p>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-
     async function getProfile() {
         return fetch("{% url 'pengaturan_akun:show_profile_json' %}").then((res) => res.json());
     }
@@ -111,7 +111,7 @@
                         <p class="h7 text-muted"><i class="fa-solid fa-calendar-days"></i> ${person.fields.birth_date}</p>
                     </div>
                     <div class="col-12 col-md-6">
-                        <p class="h7 text-muted"><i class="fa-solid fa-circle-user"></i></i> Pasien</p>
+                        <p class="h7 text-muted"><i class="fa-solid fa-circle-user"></i></i> Dokter</p>
                         <p class="h7 text-muted"><i class="fa-solid fa-person-half-dress"></i> ${person.fields.gender}</p>
                         <p class="h7 text-muted"><i class="fa-solid fa-location-dot"></i> ${person.fields.city}, ${person.fields.province}</p>
                     </div>
@@ -137,6 +137,5 @@
     }
 
     refreshProfile();
-
 </script>
 {% endblock content %}
