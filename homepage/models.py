@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+from email.policy import default
+>>>>>>> cb11860 (fixed bootstrap ver)
 from django.db import models
 from authentication.models import User
 # Create your models here.
