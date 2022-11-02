@@ -1,29 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block meta %}
 <title>Riwayat Kesehatan - HealthBud</title>
-<style>
-    .section-title {
-        background-color: #4D77FF;
-        color: white;
-    }
-    .page-title, .h5 {
-        color: #4D77FF;
-    }
-    .section {
-        flex-direction: row;
-        justify-content: space-between;
-    }
-    .btn-modal, .btn-add {
-        height: 40px;
-        width: 40px;
-    }
-    @media (min-width: 768px) {
-        .section-title {
-            width: 40%;
-        }
-    }
-</style>
+<link rel="stylesheet" href="{% static '/css/styles.css' %}">
 <script src="https://kit.fontawesome.com/ff49bbe5ae.js" crossorigin="anonymous"></script>
 {% endblock meta %}
 
