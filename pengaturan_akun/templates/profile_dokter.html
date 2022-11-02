@@ -59,15 +59,12 @@
 
 <!-- Profile Card -->
 <div class="container-fluid d-flex align-items-center justify-content-center my-4">
-    <div class="card p-3 shadow" id="record-card">
-        <div class="card-body" id="record-card">
-            <div id="picdesc-record">
-                {% load static %} <img src="{% static '/img/edit_record.svg' %}" alt="" width="300" height="300" class="img-fluid">
-                <div>
-                    <p class="h7 fw-bolder my-4 me-md-2 text-muted" id="record-desc">Riwayat Kesehatan merupakan fitur yang bertujuan untuk mempermudah Pasien dalam mengelola informasi-informasi terkait kesehatannya dan menunjukkannya pada sesi konsultasi dengan dokter.</p>
-                    <button type="button" class="btn btn-primary my-2" disabled>Lihat Riwayat Kesehatan</button>
-                </div> 
-            </div>
+    <div class="card p-3 shadow">
+        <div class="edit-column ms-auto me-3 mt-3">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fa-solid fa-pen"></i></button>
+        </div>
+        <div class="card-body" id="profile-card">
         </div>
     </div>
 </div>
@@ -76,14 +73,12 @@
 <div class="container-fluid d-flex align-items-center justify-content-center my-4">
     <div class="card p-3 shadow" id="record-card">
         <div class="card-body" id="record-card">
-            <h4 class="card-title my-2 my-md-0">Riwayat Kesehatan</h4>
             <div id="picdesc-record">
                 {% load static %} <img src="{% static '/img/edit_record.svg' %}" alt="" width="300" height="300" class="img-fluid">
-                <p class="h7" id="record=desc">Riwayat Kesehatan merupakan fitur yang bertujuan untuk mempermudah Pasien dalam mengelola informasi-informasi terkait kesehatannya dan menunjukkannya pada sesi konsultasi dengan dokter.</p>
-            </div>
-            <div class="my-2">
-                <button type="button" class="btn btn-primary" disabled>Lihat Riwayat Kesehatan</button>
-                <p class="h7 mt-2">Mohon maaf, fitur ini hanya dapat diakses oleh Pasien.</p>
+                <div>
+                    <p class="h7 fw-bolder my-4 me-md-2 text-muted" id="record-desc">Riwayat Kesehatan merupakan fitur yang bertujuan untuk mempermudah Pasien dalam mengelola informasi-informasi terkait kesehatannya dan menunjukkannya pada sesi konsultasi dengan dokter.</p>
+                    <button type="button" class="btn btn-primary my-2" onclick="location.href='/pengaturan_akun/med_record'">Lihat Riwayat Kesehatan</button>
+                </div> 
             </div>
         </div>
     </div>
