@@ -109,21 +109,76 @@
 {% block content %}
 <body>
   {% if request.user.is_authenticated %}
-    <h1>Halo, {{user.get_username}}</h1>
+    <h5 class="position-relative overflow-hidden p-3 p-md-1 m-md text-center bg-light prolog">Halo, {{user.get_username}}</h5>
   {% endif %}
   
   <h3 class="position-relative overflow-hidden p-3 p-md-1 m-md text-center bg-light prolog" >Welcome to HealthBud!</h3>
   <div class="position-relative overflow-hidden p-3 p-md-5 m-md text-center bg-light prolog">
-    <div class="col-md-5 p-lg-5 mx-auto my-1 left-text">
-      <br><br><br><br>
+    <div class="col-md-7 p-lg-5 mx-auto my-1 left-text">
       <h1 class="display-4 fw-normal"><b>Apa itu <span>HealthBud?</span></b></h1>
-      <p class="lead fw-normal">HealthBud merupakan aplikasi yang dibuat untuk mendukung pengadaan fasilitas kesehatan yang efektif dan efisien.</p>
+      <p class="lead fw-normal">HealthBud merupakan aplikasi yang dibuat untuk mendukung pengadaan fasilitas kesehatan yang efektif dan efisien. </p>
     </div>
   </div>
-  <button><a href="{% url 'bmi_calculator:show_bmi_calculator' %}">Kalkulator BMI</a></button>
-  <button><a href="{% url 'pengaturan_akun:show_profile' %}">Pengaturan Akun</a></button>
-  <button><a href="{% url 'tanya_dokter:ask-question' %}">Info Dokter</a></button>
-  <button><a href="{% url 'tanya_dokter:home' %}">Tanya Dokter</a></button>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="42%" y="50%" fill="#eceeef" dy=".3em">Kalkulator BMI</text></svg>
+            <div class="card-body">
+              <p class="card-text"> Di kalkulator BMI, kamu dapat menghitung Body Mass Index kamu, nantinya dapat digunakan untuk mengukur body fat atau persentase lemak pada tubuh. Perhitungan dapat dilakukan dengan membagi berat dengan kuadrat dari tinggi tubuh.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button><a type="button" class="btn btn-sm btn-outline-primary" href="{% url 'bmi_calculator:show_bmi_calculator' %}">Kalkulator BMI</a></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="42%" y="50%" fill="#eceeef" dy=".3em">Info Dokter</text></svg>
+            <div class="card-body">
+              <p class="card-text">Di Info Dokter, kamu dapat melihat berbagai macam jadwal dokter yang tersedia dengan spesialis berbeda dan kamu juga bisa membuat review terkait dokter yang bersangkutan</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button><a type="button" class="btn btn-sm btn-outline-primary" href="{% url 'info_dokter:show_info_dokter' %}">Info Dokter</a></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="42%" y="50%" fill="#eceeef" dy=".3em">Tanya Dokter</text></svg>
+            <div class="card-body">
+              <p class="card-text">Di Tanya Dokter, kamu bisa membuat forum untuk melakukan diskusi atau tanya jawab seputar kesehatan dengan dokter yang sesuai dengan spesialisasinya.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button><a type="button" class="btn btn-sm btn-outline-primary" href="{% url 'tanya_dokter:home' %}">Tanya Dokter</a></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="42%" y="50%" fill="#eceeef" dy=".3em">Pengaturan Akun</text></svg>
+
+            <div class="card-body">
+              <p class="card-text">Di Pengaturan Akun, kamu dapat menambahkan beberapa hal tentang dirimu untuk administrasi. Selain itu, ada juga riwayat kesehatan dimana kamu bisa mengisi riwayat kesehatan yang akan berguna untuk konsultasi nantinya.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button><a type="button" class="btn btn-sm btn-outline-primary" href="{% url 'pengaturan_akun:show_profile' %}">Pengaturan Akun</a></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="container p-5">
     <form method="POST" class="was-validated" id="form_review">
@@ -138,114 +193,55 @@
 
   <div id="review_history">
   </div>
-
-  
-  <script>
-    async function getReview() {
-        return fetch("{% url 'homepage:show_json' %}").then((res) => res.json())
-      }
-      
-    
-    async function refreshHomepage() {
-        
-      const review_objects = await getReview();
-      let htmlString = ''
-      review_objects.forEach((item) => {
-        htmlString += `\n
-        <div class="card-group">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">${item.fields.username}</h5>
-              <p class="card-text">${item.fields.review}</p>
-              <button type="button" id="button-delete" class="btn btn-light" onclick="deleteReview(${item.pk})">🗑️</button>
-            </div>
-          </div>
-        </div>
-        ` 
-      })
-      document.getElementById("review_history").innerHTML = htmlString
-    }
-  
-  
-    function addReview() {
-      console.log("TESaddd")
-      fetch("{% url 'homepage:add_review' %}", {
-            method: "POST",
-            body: new FormData(document.querySelector('#form_review'))
-        }).then(refreshHomepage)
-      return false
-    }
-
-    function deleteReview(bmiPK) {
-      // console.log("TESzzz")
-      fetch(`/delete/${bmiPK}`, {
-        method: "GET",
-        }
-        ).then(refreshHomepage)
-      return false
-    }
-  
-    refreshHomepage() 
-  </script>
 </body>
 
-<footer class="text-center text-white" style="background-color: #f1f1f1;">
-  <!-- Grid container -->
-  <div class="container pt-4">
-    <!-- Section: Social media -->
-    <section class="mb-4">
-      <!-- Facebook -->
-      <a
-        class="btn btn-link btn-floating btn-lg text-dark m-1"
-        href="#!"
-        role="button"
-        data-mdb-ripple-color="dark"
-        ><i class="fa fa-facebook-f"></i
-      ></a>
 
-      <!-- Twitter -->
-      <a
-        class="btn btn-link btn-floating btn-lg text-dark m-1"
-        href="#!"
-        role="button"
-        data-mdb-ripple-color="dark"
-        ><i class="fa fa-twitter"></i
-      ></a>
+<script>
+  async function getReview() {
+    return fetch("{% url 'homepage:show_json' %}").then((res) => res.json())
+  }
+  
 
-      <!-- Google -->
-      <a
-        class="btn btn-link btn-floating btn-lg text-dark m-1"
-        href="#!"
-        role="button"
-        data-mdb-ripple-color="dark"
-        ><i class="fa fa-google"></i
-      ></a>
+async function refreshHomepage() {
+    
+  const review_objects = await getReview();
+  let htmlString = ''
+  review_objects.forEach((item) => {
+    htmlString += `\n
+    <div class="card-group">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">${item.fields.username}</h5>
+          <p class="card-text">${item.fields.review}</p>
+          <button type="button" id="button-delete" class="btn btn-light" onclick="deleteReview(${item.pk})">🗑️</button>
+        </div>
+      </div>
+    </div>
+    ` 
+  })
+  document.getElementById("review_history").innerHTML = htmlString
+}
 
-      <!-- Instagram -->
-      <a
-        class="btn btn-link btn-floating btn-lg text-dark m-1"
-        href="#!"
-        role="button"
-        data-mdb-ripple-color="dark"
-        ><i class="fa fa-instagram"></i
-      ></a>
-      <!-- Github -->
-      <a
-        class="btn btn-link btn-floating btn-lg text-dark m-1"
-        href="#!"
-        role="button"
-        data-mdb-ripple-color="dark"
-        ><i class="fa fa-github"></i
-      ></a>
-    </section>
-    <!-- Section: Social media -->
-  </div>
-  <!-- Grid container -->
 
-  <!-- Copyright -->
-  <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    <p class="text-dark">Created By C009-PBP-2022</p>
-  </div>
-  <!-- Copyright -->
-</footer>
+function addReview() {
+  console.log("TESaddd")
+  fetch("{% url 'homepage:add_review' %}", {
+        method: "POST",
+        body: new FormData(document.querySelector('#form_review'))
+    }).then(refreshHomepage)
+  return false
+}
+
+function deleteReview(bmiPK) {
+  // console.log("TESzzz")
+  fetch(`/delete/${bmiPK}`, {
+    method: "GET",
+    }
+    ).then(refreshHomepage)
+  return false
+}
+
+refreshHomepage()
+</script>
+
 {% endblock content %}
