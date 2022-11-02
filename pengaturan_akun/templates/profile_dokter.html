@@ -1,34 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block meta %}
 <title>Pengaturan Akun - HealthBud</title>
-<style>
-    body {
-        background-color: #F4F4F4;
-    }
-    .card {
-        border-radius: 12px;
-        width: 80%;
-        max-width: 800px;
-        text-align: center;
-    }
-    .card-body {
-        display: flex;
-        flex-direction: column;
-    }
-    @media (min-width: 768px) {
-        .card-body {
-            flex-direction: row;
-            text-align: left;
-        }
-        .card-title {
-            line-height: 80px;
-        }
-        #record-card {
-            flex-direction: column;
-        }
-    }
-</style>
+<link rel="stylesheet" href="{% static '/css/styles.css' %}">
 <script src="https://kit.fontawesome.com/ff49bbe5ae.js" crossorigin="anonymous"></script>
 {% endblock meta %}
 
@@ -76,7 +51,7 @@
             <div id="picdesc-record">
                 {% load static %} <img src="{% static '/img/edit_record.svg' %}" alt="" width="300" height="300" class="img-fluid">
                 <div>
-                    <p class="h7 fw-bolder my-4 me-md-2 text-muted" id="record-desc">Riwayat Kesehatan merupakan fitur yang bertujuan untuk mempermudah Pasien dalam mengelola informasi-informasi terkait kesehatannya dan menunjukkannya pada sesi konsultasi dengan dokter.</p>
+                    <p class="h7 fw-bolder my-4 me-md-2 text-muted" id="record-desc">Fitur Riwayat Kesehatan hanya dapat diakses oleh Pasien.</p>
                     <button type="button" class="btn btn-primary my-2" onclick="location.href='/pengaturan_akun/med_record'">Lihat Riwayat Kesehatan</button>
                 </div> 
             </div>
