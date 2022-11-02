@@ -77,6 +77,8 @@ def show_bmi_calculator(request):
     current_user = auth.get_user(request)
 
     if(not current_user.is_pasien):
+        # return messages("Register sebagai pasien untuk melihat fitur ini!")
+        # messages.info(request, 'Anda perlu register sebagai Pasien untuk melihat fitur ini.')
         return redirect('authentication:login')
 
     bmi_objects = BMI.objects.filter(user = current_user)
@@ -104,9 +106,9 @@ def show_json(request):
 #     return bmi_object
 
 def add_bmi(request):
-    print("tesssssssss")
+    # print("tesssssssss")
     if(request.method == 'POST'):
-        print("adiojasodija")
+        # print("adiojasodija")
         current_user = auth.get_user(request)
         # jenis_kelamin = request.POST.get('jenis_kelamin')
         umur = int(request.POST.get('umur'))
@@ -128,12 +130,12 @@ def add_bmi(request):
         if(umur < 19):
             deskripsi_hasil = "Tidak diketahui"
         
-        print("tesssssssss")
+        # print("tesssssssss")
 
         new_bmi = BMI(user=current_user, umur=umur, tinggi=tinggi, berat=berat, date_created=date_created, bmi_result=bmi_result, deskripsi_hasil=deskripsi_hasil)
         new_bmi.save()
         
-        print("add berhasil")
+        # print("add berhasil")
 
         return HttpResponse(b"CREATED", status=201)
 
