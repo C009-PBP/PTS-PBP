@@ -108,11 +108,6 @@
 
 {% block content %}
 <body>
-  {% if request.user.is_authenticated %}
-    <h5 class="position-relative overflow-hidden p-3 p-md-1 m-md text-center bg-light prolog">Halo, {{user.get_username}}</h5>
-  {% endif %}
-  
-  <h3 class="position-relative overflow-hidden p-3 p-md-1 m-md text-center bg-light prolog" >Welcome to HealthBud!</h3>
   <div class="position-relative overflow-hidden p-3 p-md-5 m-md text-center bg-light prolog">
     <div class="col-md-7 p-lg-5 mx-auto my-1 left-text">
       <h1 class="display-4 fw-normal"><b>Apa itu <span>HealthBud?</span></b></h1>
