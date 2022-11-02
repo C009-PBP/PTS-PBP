@@ -1,0 +1,49 @@
+body {
+    background-color: #F4F4F4;
+}
+.card {
+    border-radius: 12px;
+    width: 80%;
+    max-width: 800px;
+    text-align: center;
+}
+.card-body, #picdesc-record {
+    display: flex;
+    flex-direction: column;
+}
+
+.section-title {
+    background-color: #4A60E9;
+    color: white;
+}
+.page-title, .h5 {
+    color: #4A60E9;
+}
+.section {
+    flex-direction: row;
+    justify-content: space-between;
+}
+.btn-modal, .btn-add {
+    height: 40px;
+    width: 40px;
+}
+
+@media (min-width: 768px) {
+    .card-body {
+        flex-direction: row;
+        text-align: left;
+    }
+    .card-title {
+        line-height: 80px;
+    }
+    #record-card {
+        flex-direction: column;
+    }
+    #picdesc-record {
+        flex-direction: row;
+    }
+
+    .section-title {
+        width: 40%;
+    }
+}

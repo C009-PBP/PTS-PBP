@@ -7,35 +7,46 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-     $(document).ready(function(){
-      $.get( "{% url 'info_dokter:show_json2' %}", function(data) {
-       addReview(data);      
-    });
-     $("#addReview").submit(function (e) {
-      e.preventDefault();
-      var serializedData = $(this).serialize();
-      $.ajax({
-          url: "{% url 'info_dokter:add_review' %}",
-          type: "POST",
-          data: serializedData,
-          dataType: 'text',
-          success: function (data) {
-              $("#exampleModal").modal('hide');
-              $('#addReview').each(function () {
-                  this.reset();
-              });
+function addReview(data) {
+  if (data.length == 0) {
 
-              // Empty div class and make new
-              $("#data").empty();
-              $.get( "{% url 'info_dokter:show_json2' %}", function(data) {
-                addReview(data);
-              });
-          }
-      });    
-    });
+  var pesan = document.createElement('p');
+      pesan.innerHTML = 'Belum ada review';
+      pesan.style.margin = "0px 10px";
 
-    $()
+      $(document.body).append(pesan);
+  } else {
+  
+
+$(document).ready(function(){
+  $.get( "{% url 'info_dokter:show_json2' %}", function(data) {
+    addReview(data);      
+  });
+  $("#addReview").submit(function (e) {
+    e.preventDefault();
+    var serializedData = $(this).serialize();
+    $.ajax({
+        url: "{% url 'info_dokter:add_review' %}",
+        type: "POST",
+        data: serializedData,
+        dataType: 'text',
+        success: function (data) {
+            $("#exampleModal").modal('hide');
+            $('#addReview').each(function () {
+                this.reset();
+            });
+
+            // Empty div class and make new
+            $("#data").empty();
+            $.get( "{% url 'info_dokter:show_json2' %}", function(data) {
+              addReview(data);
+            });
+        }
+    });    
+  });
 });
+}
+}
 </script>
 {% endblock meta %}
 {% block content %}
