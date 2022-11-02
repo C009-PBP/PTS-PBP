@@ -1,3 +1,8 @@
+$("div.lazy").lazyload({
+  effect : "fadeIn"
+});
+
+
 async function getBMI() {
     return fetch("/bmi_calculator/json").then((res) => res.json())
   }
