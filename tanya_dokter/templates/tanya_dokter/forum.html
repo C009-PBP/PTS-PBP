@@ -46,7 +46,7 @@
     {% for quest in quests %}
     <div class="card mb-3 shadow" style="width:800px; margin: auto;">
         <div class="card-body">
-            <h4 class="card-title"><a href="detail/{{quest.id}}">{{quest.title}}</a></h4>
+            <h4 class="card-title"><a href="detail/{{quest.id}}" style="text-decoration:none;">{{quest.title}}</a></h4>
             <p class="card-text">{{quest.detail}}</p>
             <p>
                 by <a href="#" class="mr-2" style="text-decoration:none;">{{quest.user.username}}</a>
