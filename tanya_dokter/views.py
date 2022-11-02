@@ -55,6 +55,7 @@ def home(request):
 
 
 # detail question
+@login_required(login_url='/authentication/login')
 def show_detail(request, id):
     quest = Question.objects.get(pk=id)
     tags = quest.tags.split(',')
@@ -80,6 +81,7 @@ def show_detail(request, id):
 
 
 # save comment
+@login_required(login_url='/authentication/login')
 def save_comment(request):
     if request.method == 'POST':
         comment = request.POST['comment']
@@ -95,6 +97,7 @@ def save_comment(request):
 
 
 # Ask Form
+@login_required(login_url='/authentication/login')
 def ask_form(request):
     form = QuestionForm
     if request.method == 'POST':
