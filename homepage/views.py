@@ -19,7 +19,7 @@ def show_json(request):
     review_objects = Review.objects.all()
     return HttpResponse(serializers.serialize("json", review_objects), content_type="application/json")
 
-
+@login_required(login_url='/authentication/login/')
 def add_review(request):
     if(request.method == 'POST'):
         print("abcaaaaaaaaaaaaaaaaaaaaaaaa")
@@ -39,7 +39,8 @@ def add_review(request):
         return HttpResponse(b"CREATED", status=201)
 
     return HttpResponseNotFound()
-
+    
+@login_required(login_url='/authentication/login/')
 def delete_review(request, id):
     if(request.method == 'GET'):
         review_obj = Review.objects.get(pk=id)
