@@ -114,15 +114,64 @@
   
   <h3 class="position-relative overflow-hidden p-3 p-md-1 m-md text-center bg-light prolog" >Welcome to HealthBud!</h3>
   <div class="position-relative overflow-hidden p-3 p-md-5 m-md text-center bg-light prolog">
-    <div class="col-md-5 p-lg-5 mx-auto my-1 left-text">
-      <br><br><br><br>
+    <div class="col-md-7 p-lg-5 mx-auto my-1 left-text">
       <h1 class="display-4 fw-normal"><b>Apa itu <span>HealthBud?</span></b></h1>
-      <p class="lead fw-normal">HealthBud merupakan aplikasi yang dibuat untuk mendukung pengadaan fasilitas kesehatan yang efektif dan efisien.</p>
+      <p class="lead fw-normal">HealthBud merupakan aplikasi yang dibuat untuk mendukung pengadaan fasilitas kesehatan yang efektif dan efisien. </p>
     </div>
   </div>
+
+<script>
+  async function getReview() {
+    return fetch("{% url 'homepage:show_json' %}").then((res) => res.json())
+  }
+  
+
+async function refreshHomepage() {
+    
+  const review_objects = await getReview();
+  let htmlString = ''
+  review_objects.forEach((item) => {
+    htmlString += `\n
+    <div class="card-group">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">${item.fields.username}</h5>
+          <p class="card-text">${item.fields.review}</p>
+          <button type="button" id="button-delete" class="btn btn-light" onclick="deleteReview(${item.pk})">🗑️</button>
+        </div>
+      </div>
+    </div>
+    ` 
+  })
+  document.getElementById("review_history").innerHTML = htmlString
+}
+
+
+function addReview() {
+  console.log("TESaddd")
+  fetch("{% url 'homepage:add_review' %}", {
+        method: "POST",
+        body: new FormData(document.querySelector('#form_review'))
+    }).then(refreshHomepage)
+  return false
+}
+
+function deleteReview(bmiPK) {
+  // console.log("TESzzz")
+  fetch(`/delete/${bmiPK}`, {
+    method: "GET",
+    }
+    ).then(refreshHomepage)
+  return false
+}
+
+refreshHomepage()
+</script>
+
+
   <button><a href="{% url 'bmi_calculator:show_bmi_calculator' %}">Kalkulator BMI</a></button>
   <button><a href="{% url 'pengaturan_akun:show_profile' %}">Pengaturan Akun</a></button>
-  <button><a href="{% url 'tanya_dokter:ask-question' %}">Info Dokter</a></button>
+  <button><a href="{% url 'info_dokter:show_info_dokter' %}">Info Dokter</a></button>
   <button><a href="{% url 'tanya_dokter:home' %}">Tanya Dokter</a></button>
 
   <div class="container p-5">
@@ -138,55 +187,6 @@
 
   <div id="review_history">
   </div>
-
-  
-  <script>
-    async function getReview() {
-        return fetch("{% url 'homepage:show_json' %}").then((res) => res.json())
-      }
-      
-    
-    async function refreshHomepage() {
-        
-      const review_objects = await getReview();
-      let htmlString = ''
-      review_objects.forEach((item) => {
-        htmlString += `\n
-        <div class="card-group">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">${item.fields.username}</h5>
-              <p class="card-text">${item.fields.review}</p>
-              <button type="button" id="button-delete" class="btn btn-light" onclick="deleteReview(${item.pk})">🗑️</button>
-            </div>
-          </div>
-        </div>
-        ` 
-      })
-      document.getElementById("review_history").innerHTML = htmlString
-    }
-  
-  
-    function addReview() {
-      console.log("TESaddd")
-      fetch("{% url 'homepage:add_review' %}", {
-            method: "POST",
-            body: new FormData(document.querySelector('#form_review'))
-        }).then(refreshHomepage)
-      return false
-    }
-
-    function deleteReview(bmiPK) {
-      // console.log("TESzzz")
-      fetch(`/delete/${bmiPK}`, {
-        method: "GET",
-        }
-        ).then(refreshHomepage)
-      return false
-    }
-  
-    refreshHomepage() 
-  </script>
 </body>
 
 <footer class="text-center text-white" style="background-color: #f1f1f1;">
