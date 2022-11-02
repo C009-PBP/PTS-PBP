@@ -25,7 +25,7 @@ def add_review(request):
         print("abcaaaaaaaaaaaaaaaaaaaaaaaa")
 
         current_user = auth.get_user(request)
-        username = current_user.get_username
+        username = current_user.get_username()
         review = request.POST.get('review')
         date_created = datetime.datetime.now()
         

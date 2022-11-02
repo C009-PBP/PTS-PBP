@@ -1,13 +1,99 @@
-{% extends 'base.html' %}
-{% load static %}
+<head>
+  <title>Homepage</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
 
-{% block meta %}
-<title>Homepage</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-{% endblock meta %}
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
 
-{% block content %}
+*{
+    font-family: 'Manrope';
+}
+
+
+.form-group{
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    align-self: auto;
+}
+
+.container {
+    max-width: 960px;
+  }
+  /*
+   * Extra utilities
+   */
+  @media (min-width: 768px) {
+    .flex-md-equal > * {
+      flex: 1;
+    }
+  }
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+.prolog{  
+    background-color: rgb();
+    display: cover;
+    background-repeat: no-repeat;
+    background-size:cover;
+    height: 800px;
+}
+
+/* 
+@media(max-width:1200px){
+.doctor-cartoon{
+    iamge
+}
+} */
+
+.doctor-cartoon{  
+    left: 0px;
+}
+
+.bg-mid{
+    background-color:white;
+}
+
+.img-doctor{
+    background-image: url('../images/_0046 1 1.png');
+    height: 700px;
+    display:flex;
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+
+.top-text{
+    color: white;
+}
+
+#BMI-text{
+    color:#4461F2
+}
+
+.btn-edit:link, .btn-edit:visited {
+    background-color: white;
+    color: black;
+    border: 2px solid #221C35;
+    border-radius: 10px;
+    padding: 20px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+  
+.btn-edit:hover, .btn-edit:active {
+    background-color: #4461F2;
+    color: aliceblue;
+}
+</style>
+
+<body>
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
       <a class="navbar-brand">HealthBud</a>
@@ -52,8 +138,14 @@
     <h1>Halo, {{user.get_username}}</h1>
   {% endif %}
   
-  <h3>Welcome to HealthBud!</h3>
-  
+  <h3 class="position-relative overflow-hidden p-3 p-md-1 m-md text-center bg-light prolog" >Welcome to HealthBud!</h3>
+  <div class="position-relative overflow-hidden p-3 p-md-5 m-md text-center bg-light prolog">
+    <div class="col-md-5 p-lg-5 mx-auto my-1 left-text">
+      <br><br><br><br>
+      <h1 class="display-4 fw-normal"><b>Apa itu <span>HealthBud?</span></b></h1>
+      <p class="lead fw-normal">HealthBud merupakan aplikasi yang dibuat untuk mendukung pengadaan fasilitas kesehatan yang efektif dan efisien.</p>
+    </div>
+  </div>
   <button>Kalkulator BMI</button>
   <button>Pengaturan Akun</button>
   <button>Info Dokter</button>
@@ -86,13 +178,17 @@
       let htmlString = ''
       review_objects.forEach((item) => {
         htmlString += `\n
-        <div class="flex-container justify-content-center align-self-center d-flex h-100""">
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">${item.fields.review}</h5>
-              <p class="card-title">${item.fields.date_created}</p>
-              <p class="card-title">${item.fields.username}</p>
-              <button type="button" id="button-delete" class="btn btn-primary" onclick="deleteReview(${item.pk})">Delete</button>
+        <div class="flex-container justify-content-center align-self-left gap-3 d-flex h-90""">
+          <div class="row">
+            <div class="card-columns">
+              <div class="card" style="width: 15rem;">
+                <div class="card-body">
+                  <h5 class="card-title">${item.fields.username}</h5>
+                  <p class="card-text">${item.fields.review}</p>
+                  <p class="card-text"><small class="text-muted">${item.fields.date_created}</small></p>
+                  <button type="button" id="button-delete" class="btn btn-light" onclick="deleteReview(${item.pk})">🗑️</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -111,9 +207,9 @@
       return false
     }
 
-    function deleteReview(reviewPK) {
-      console.log("TESzzz")
-      fetch(`homepage/delete/${reviewPK}`, {
+    function deleteReview(bmiPK) {
+      // console.log("TESzzz")
+      fetch(`/delete/${bmiPK}`, {
         method: "GET",
         }
         ).then(refreshHomepage)
@@ -122,5 +218,64 @@
   
     refreshHomepage() 
   </script>
+</body>
 
-{% endblock content %}
+<footer class="text-center text-white" style="background-color: #f1f1f1;">
+  <!-- Grid container -->
+  <div class="container pt-4">
+    <!-- Section: Social media -->
+    <section class="mb-4">
+      <!-- Facebook -->
+      <a
+        class="btn btn-link btn-floating btn-lg text-dark m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fa fa-facebook-f"></i
+      ></a>
+
+      <!-- Twitter -->
+      <a
+        class="btn btn-link btn-floating btn-lg text-dark m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fa fa-twitter"></i
+      ></a>
+
+      <!-- Google -->
+      <a
+        class="btn btn-link btn-floating btn-lg text-dark m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fa fa-google"></i
+      ></a>
+
+      <!-- Instagram -->
+      <a
+        class="btn btn-link btn-floating btn-lg text-dark m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fa fa-instagram"></i
+      ></a>
+      <!-- Github -->
+      <a
+        class="btn btn-link btn-floating btn-lg text-dark m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fa fa-github"></i
+      ></a>
+    </section>
+    <!-- Section: Social media -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <p class="text-dark">Created By C009-PBP-2022</p>
+  </div>
+  <!-- Copyright -->
+</footer>
