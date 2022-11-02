@@ -34,7 +34,7 @@ def show_json(request):
 def show_json2(request): 
     orang = request.user
     dataReview2 = ReviewDokter.objects.filter(user = orang)
-    return HttpResponse(serializers.serialize("json2", dataReview2), content_type="application/json")
+    return HttpResponse(serializers.serialize("json", dataReview2), content_type="application/json")
 
 
 
