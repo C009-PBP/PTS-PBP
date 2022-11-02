@@ -12,6 +12,8 @@ html {
     text-align: center;
     align-content: center;
     align-self: auto;
+
+    
 }
 
 .container {
@@ -37,7 +39,7 @@ html {
     background-size:cover;
     height: 800px;
 
-    
+
 }
 
 /* 
