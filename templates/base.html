@@ -44,11 +44,11 @@
   <div class="container-fluid" style="">
   <a href="{% url 'homepage:index' %}" class="navbar-brand logo" 
     style="
-    width: 129px;
+    width: 100px;
     height: 33px;
 
     padding-bottom:37px;
-    padding-left:5%;
+    padding-left:1%;
 
     font-family: 'Manrope', sans-serif;
     font-style: normal;
@@ -62,7 +62,7 @@
     /* Black */
 
     color: #202020;">👩🏻‍⚕️
-    <span href="{% url 'homepage:index' %}" style="color: #FFFFFF; margin-left:7px;">Health</span>Bud</a>
+    <span href="{% url 'homepage:index' %}" style="color: #FFFFFF; margin-left:17px;">Health</span>Bud</a>
 
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -105,7 +105,11 @@
             </ul>
         </li>
         <li class="nav-item">
+          {% if request.user.is_authenticated %}
             <a class="nav-link log" id="log" href="{% url 'authentication:logout' %}" style="color: #FFFFFF;">Logout</a>
+          {% else %}
+            <a class="nav-link log" href="{% url 'authentication:login' %}" style="color: #FFFFFF;">Login</a>
+          {% endif %}
         </li>
       </ul>
     </span>
