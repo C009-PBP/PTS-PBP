@@ -90,5 +90,6 @@ class EditMedRecord(forms.ModelForm):
     allergies = forms.CharField(label='Riwayat Alergi:', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Riwayat Alergi'}))
 
     class Meta:
+        
         model = Profile
         fields = ['bloodtype', 'bloodpressure', 'illnesses', 'allergies']
