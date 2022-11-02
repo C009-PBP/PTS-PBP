@@ -62,3 +62,26 @@ class EditProfile(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['first_name', 'last_name', 'phone_no', 'email', 'birth_date', 'street', 'city', 'province', 'gender', 'profile_pic']
+
+class EditEmergencyContact(forms.ModelForm):
+    emergency_firstname = forms.CharField(label='Nama Depan:', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nama Depan', 'name': 'emergency_firstname'}))
+    emergency_lastname = forms.CharField(label='Nama Belakang:', widget=forms.TextInput(attrs={'class': 'form-control','placeholder': 'Nama Belakang', 'name': 'emergency_lastname'}))
+    emergency_relationship = forms.CharField(label='Hubungan Dengan Pasien:', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Hubungan dengan pasien', 'name': 'emergency_relationship'}))
+    emergency_phone_no = forms.CharField(label='No. Telepon:', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'No. Telepon', 'name': 'emergency_phone_no'}))
+    emergency_street = forms.CharField(label='Alamat:', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Alamat', 'name': 'emergency_street'}))
+    emergency_city = forms.CharField(label='Kota:',widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Kota', 'name': 'emergency_city'}))
+    emergency_province = forms.CharField(label='Provinsi:', widget=forms.Select(choices=PROVINCES, attrs={'class': 'form-select', 'name': 'emergency_province'}))
+
+    class Meta:
+        model = Profile
+        fields = ['emergency_firstname', 'emergency_lastname', 'emergency_relationship', 'emergency_phone_no', 'emergency_street', 'emergency_city', 'emergency_province']
+
+class EditMedRecord(forms.ModelForm):
+    bloodtype = forms.CharField(label='Golongan Darah:', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Golongan Darah'}))
+    bloodpressure = forms.CharField(label='Tekanan Darah:', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Tekanan Darah (mmHg)'}))
+    illnesses = forms.CharField(label='Riwayat Penyakit:', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Riwayat Alergi'}))
+    allergies = forms.CharField(label='Riwayat Alergi:', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Riwayat Alergi'}))
+
+    class Meta:
+        model = Profile
+        fields = ['bloodtype', 'bloodpressure', 'illnesses', 'allergies']
