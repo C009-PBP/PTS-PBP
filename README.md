@@ -40,7 +40,7 @@ Di dalam aplikasi ini, Implementasi AJAX dilakukan untuk mengambil input *form* 
 
 
 ## Daftar modul yang akan diimplementasikan:
-* Authentication (Untuk membedakan jenis user, melakukan register, dan login) --> Dhito
+* Authentication (untuk membedakan jenis user, melakukan register, dan login) --> Dhito
 * Form pendaftaran client/pengaturan akun (riwayat kesehatan, dll) -> Nasya
 * Kalkulator BMI -> Dhito
 * Jadwal praktek dokter + review dokter -> Reza
@@ -50,6 +50,6 @@ Di dalam aplikasi ini, Implementasi AJAX dilakukan untuk mengambil input *form* 
 
 ## Role atau peran pengguna beserta deskripsinya (karena bisa saja lebih dari satu jenis pengguna yang mengakses aplikasi):
 
-Pada implementasi aplikasi kami, jenis pengguna yang akan dapat menggunakan app ini adalah pasien dan dokter. Pasien harus login terlebih dahulu untuk dapat menggunakan app ini. Setelah berhasil masuk, Pasien akan ter-direct ke halaman homepage. Setelahnya, di homepage akan ditampilkan akses ke dalam modul yang lain, seperti Kalkulator BMI, Pengaturan akun (Isi profil), jadwal praktik dan review dokter, serta Tanya Dokter.
+Pada implementasi aplikasi kami, jenis pengguna yang akan dapat menggunakan app ini adalah pasien dan dokter. Pasien harus login terlebih dahulu untuk dapat menggunakan app ini. Setelah berhasil masuk, Pasien akan ter-direct ke halaman homepage. Setelahnya, di homepage akan ditampilkan akses ke dalam modul yang lain, seperti Kalkulator BMI, Pengaturan Akun (isi profil), Info Dokter, serta Tanya Dokter.
 
-Untuk dokter, login juga perlu dilakukan terlebih dahulu. Setelah berhasil masuk, Dokter akan ter-direct ke halaman homepage. Di homepage, akan ditampilkan akses ke dalam modul yang lain. Namun, user dengan tipe dokter tidak dapat mengakses aplikasi kalkulator BMI (Diperuntukkan khusus untuk pasien). 
+Untuk dokter, login juga perlu dilakukan terlebih dahulu. Setelah berhasil masuk, Dokter akan ter-direct ke halaman homepage. Di homepage, akan ditampilkan akses ke dalam modul yang lain. Namun, user dengan tipe dokter tidak dapat mengakses aplikasi kalkulator BMI (diperuntukkan khusus untuk pasien). 
