@@ -47,6 +47,13 @@ PROVINCES = (
     ('Papua Selatan', 'Papua Selatan'),
 )
 
+GOLDAR = ( 
+('A','A'),
+('B','B'),
+('AB','AB'),
+('O','O'),
+)
+
 class EditProfile(forms.ModelForm):
     first_name = forms.CharField(label='Nama Depan:', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nama Depan', 'name': 'first_name'}))
     last_name = forms.CharField(label='Nama Belakang:', widget=forms.TextInput(attrs={'class': 'form-control','placeholder': 'Nama Belakang', 'name': 'last_name'}))
@@ -77,11 +84,12 @@ class EditEmergencyContact(forms.ModelForm):
         fields = ['emergency_firstname', 'emergency_lastname', 'emergency_relationship', 'emergency_phone_no', 'emergency_street', 'emergency_city', 'emergency_province']
 
 class EditMedRecord(forms.ModelForm):
-    bloodtype = forms.CharField(label='Golongan Darah:', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Golongan Darah'}))
+    bloodtype = forms.CharField(label='Golongan Darah:', widget=forms.Select(choices=GOLDAR, attrs={'class': 'form-select', 'name': 'bloodtype'}))
     bloodpressure = forms.CharField(label='Tekanan Darah:', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Tekanan Darah (mmHg)'}))
     illnesses = forms.CharField(label='Riwayat Penyakit:', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Riwayat Alergi'}))
     allergies = forms.CharField(label='Riwayat Alergi:', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Riwayat Alergi'}))
 
     class Meta:
+        
         model = Profile
         fields = ['bloodtype', 'bloodpressure', 'illnesses', 'allergies']
