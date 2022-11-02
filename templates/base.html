@@ -66,8 +66,7 @@
 
     /* Black */
 
-    color: #202020;">👩🏻‍⚕️
-    <span href="{% url 'homepage:index' %}" style="color: #FFFFFF; margin-left:17px;">Health</span>Bud</a>
+    color: #202020;">👩🏻‍⚕️<span href="{% url 'homepage:index' %}" style="color: #FFFFFF; margin-left:7px;">Health</span>Bud</a>
 
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -97,6 +96,7 @@
       </li>
     </ul>
     <span class="navbar-text">
+      {% if request.user.is_authenticated %}
       <ul class="navbar-nav me-auto mb-lg-0" style="padding-right:80px">
         <li class="nav-item dropdown mx-2">
           
@@ -105,7 +105,6 @@
               {{user.get_username}}
             </a>
             <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" style="color: #121212;">Data Diri</a></li>
             <li><a class="dropdown-item" href="{% url 'pengaturan_akun:show_profile' %}" style="color: #121212;">Pengaturan Akun</a></li>
             </ul>
         </li>
@@ -117,6 +116,16 @@
           {% endif %}
         </li>
       </ul>
+      {% else %}
+      <ul class="navbar-nav me-auto mb-lg-0" style="padding-right:80px">
+        <li class="nav-item">
+            <a class="nav-link log" id="log" href="{% url 'authentication:login' %}" style="color: #FFFFFF;">Login</a>
+        </li>
+        <li class="nav-item dropdown mx-3">
+          <a class="btn btn-dark" href="{% url 'authentication:register' %}" role="button"><span style="color: #FFFFFF;">Register</span></a>
+        </li>
+      </ul>
+      {% endif %}
     </span>
   </div>
   </div>

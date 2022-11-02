@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Riwayat Kesehatan - HealthBud</title>
+<style>
+    .section-title {
+        background-color: #4D77FF;
+        color: white;
+    }
+    .page-title, .h5 {
+        color: #4D77FF;
+    }
+    .section {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .btn-modal, .btn-add {
+        height: 40px;
+        width: 40px;
+    }
+    @media (min-width: 768px) {
+        .section-title {
+            width: 40%;
+        }
+    }
+</style>
+<script src="https://kit.fontawesome.com/ff49bbe5ae.js" crossorigin="anonymous"></script>
+{% endblock meta %}
+
+{% block content %}
+
+<!-- Modal Emergency Contact-->
+<form id="form-edit-emergency" method="POST" class="form-container" onsubmit="return false;">
+    <div class="modal fade" id="emergencyModal" tabindex="-1" role="dialog" aria-labelledby="emergencyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="emergencyModalLabel">Kontak Darurat</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <p>
+                        {{ emergency_form.as_p }}
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" id="update-emergency" data-dismiss="modal" onclick="">Simpan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- Modal Medical Record-->
+<form id="form-edit-record" method="POST" class="form-container" onsubmit="return false;">
+    <div class="modal fade" id="recordModal" tabindex="-1" role="dialog" aria-labelledby="recordModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="recordModalLabel">Riwayat Kesehatan Pasien</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <p>
+                        {{ med_record_form.as_p }}
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" id="update-record" data-dismiss="modal" onclick="">Simpan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="health-record container my-4">
+    <p class="page-title h3 text-center fw-bold">Health Record</p>
+    <hr>
+
+    <p class="h4 mt-4 p-2 section-title">Informasi Pasien</p>
+
+    <div class="row">
+        <div class="col-md-6">
+            <p class="h5">Nama Lengkap</p>
+            <p>{{user.profile.first_name}} {{user.profile.last_name}}</p>
+            <p class="h5">No. Telepon</p>
+            <p>{{user.profile.phone_no}}</p>
+            <p class="h5">Alamat</p>
+            <p>{{user.profile.street}}, {{user.profile.city}}, {{user.profile.province}}, Indonesia</p>
+        </div>
+        <div class="col-md-6">
+            <p class="h5">Umur</p>
+            <p>{{user.profile.birth_date}}</p>
+            <p class="h5">Email</p>
+            <p>{{user.profile.email}}</p>
+            <p class="h5">Jenis Kelamin</p>
+            <p>{{user.profile.gender}}</p>
+        </div>
+    </div>
+
+    <div class="d-flex section">
+        <p class="h4 mt-4 p-2 section-title">Kontak Darurat</p>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary mt-4 btn-modal" data-bs-toggle="modal" data-bs-target="#emergencyModal"><i class="fa-solid fa-pen"></i></button>
+    </div>
+
+    <div class="row" id="emergency-contact"></div>
+
+    <div class="d-flex section">
+        <p class="h4 mt-4 p-2 section-title">Riwayat Kesehatan Pasien</p>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary mt-4 btn-modal" data-bs-toggle="modal" data-bs-target="#recordModal"><i class="fa-solid fa-pen"></i></button>
+    </div>
+
+    <div class="row" id="med-record"></div>
+
+    <button type="button" class="btn btn-primary mt-4" onclick="location.href='/pengaturan_akun/'">Kembali ke Pengaturan Akun</button>
+</div>
+
+<script>
+
+    async function getProfile() {
+        return fetch("{% url 'pengaturan_akun:show_profile_json' %}").then((res) => res.json());
+    }
+
+    // AJAX GET
+    async function refreshProfile() {
+        const profile = await getProfile();
+        let htmlStr = "";
+        let htmlStr2 = "";
+        profile.forEach((person) => {
+            document.getElementById("update-emergency").setAttribute('onclick', `updateEmergency(${person.pk})`)
+            document.getElementById("update-record").setAttribute('onclick', `updateRecord(${person.pk})`)
+            htmlStr += `\n<div class="col-md-6">
+            <p class="h5">Nama Lengkap</p>
+            <p>${person.fields.emergency_firstname} ${person.fields.emergency_lastname}</p>
+            <p class="h5">Hubungan Dengan Pasien</p>
+            <p>${person.fields.emergency_relationship}</p>
+        </div>
+        <div class="col-md-6">
+            <p class="h5">Alamat</p>
+            <p>${person.fields.emergency_street}, ${person.fields.emergency_city}, ${person.fields.emergency_province}, Indonesia</p>
+            <p class="h5">No. Telepon</p>
+            <p>${person.fields.emergency_phone_no}</p>
+        </div>`
+            htmlStr2 += `<div class="col-md-6">
+            <p class="h5">Golongan Darah</p>
+            <p>${person.fields.bloodtype}</p>
+            <p class="h5">Riwayat Penyakit</p>
+            <p>${person.fields.illnesses}</p>
+            
+        </div>
+        <div class="col-md-6">
+            <p class="h5">Tekanan Darah</p>
+            <p>${person.fields.bloodpressure}</p>
+            <p class="h5">Riwayat Alergi</p>
+            <p>${person.fields.allergies}</p>
+        </div>`
+        })
+        document.getElementById("emergency-contact").innerHTML = htmlStr;
+        document.getElementById("med-record").innerHTML = htmlStr2;
+        $('#emergencyModal').modal('hide');
+        $('#recordModal').modal('hide');
+    }
+    
+    // AJAX POST
+    function updateEmergency(pk) {
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        fetch(`/pengaturan_akun/update_emergency/${pk}`, {
+            method: "POST",
+            body: new FormData(document.querySelector('#form-edit-emergency')),
+            credentials: 'same-origin',
+            headers: {
+                "X-CSRFToken": `${csrftoken}`
+            }
+        }).then(refreshProfile);
+        return false;
+    }
+
+    // AJAX POST
+    function updateRecord(pk) {
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        fetch(`/pengaturan_akun/update_record/${pk}`, {
+            method: "POST",
+            body: new FormData(document.querySelector('#form-edit-record')),
+            credentials: 'same-origin',
+            headers: {
+                "X-CSRFToken": `${csrftoken}`
+            }
+        }).then(refreshProfile);
+        return false;
+    }
+
+    refreshProfile();
+
+</script>
+
+{% endblock content %}
