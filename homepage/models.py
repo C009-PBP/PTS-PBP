@@ -1,5 +1,3 @@
-from asyncio.windows_events import NULL
-from email.policy import default
 from django.db import models
 from authentication.models import User
 # Create your models here.
