@@ -109,7 +109,7 @@
 {% block content %}
 <body>
   {% if request.user.is_authenticated %}
-    <h1>Halo, {{user.get_username}}</h1>
+    <h5 class="position-relative overflow-hidden p-3 p-md-1 m-md text-center bg-light prolog">Halo, {{user.get_username}}</h5>
   {% endif %}
   
   <h3 class="position-relative overflow-hidden p-3 p-md-1 m-md text-center bg-light prolog" >Welcome to HealthBud!</h3>
@@ -119,56 +119,6 @@
       <p class="lead fw-normal">HealthBud merupakan aplikasi yang dibuat untuk mendukung pengadaan fasilitas kesehatan yang efektif dan efisien. </p>
     </div>
   </div>
-
-<script>
-  async function getReview() {
-    return fetch("{% url 'homepage:show_json' %}").then((res) => res.json())
-  }
-  
-
-async function refreshHomepage() {
-    
-  const review_objects = await getReview();
-  let htmlString = ''
-  review_objects.forEach((item) => {
-    htmlString += `\n
-    <div class="card-group">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">${item.fields.username}</h5>
-          <p class="card-text">${item.fields.review}</p>
-          <button type="button" id="button-delete" class="btn btn-light" onclick="deleteReview(${item.pk})">🗑️</button>
-        </div>
-      </div>
-    </div>
-    ` 
-  })
-  document.getElementById("review_history").innerHTML = htmlString
-}
-
-
-function addReview() {
-  console.log("TESaddd")
-  fetch("{% url 'homepage:add_review' %}", {
-        method: "POST",
-        body: new FormData(document.querySelector('#form_review'))
-    }).then(refreshHomepage)
-  return false
-}
-
-function deleteReview(bmiPK) {
-  // console.log("TESzzz")
-  fetch(`/delete/${bmiPK}`, {
-    method: "GET",
-    }
-    ).then(refreshHomepage)
-  return false
-}
-
-refreshHomepage()
-</script>
-
-
 
   <div class="album py-5 bg-light">
     <div class="container">
@@ -249,63 +199,53 @@ refreshHomepage()
   </div>
 </body>
 
-<footer class="text-center text-white" style="background-color: #f1f1f1;">
-  <!-- Grid container -->
-  <div class="container pt-4">
-    <!-- Section: Social media -->
-    <section class="mb-4">
-      <!-- Facebook -->
-      <a
-        class="btn btn-link btn-floating btn-lg text-dark m-1"
-        href="#!"
-        role="button"
-        data-mdb-ripple-color="dark"
-        ><i class="fa fa-facebook-f"></i
-      ></a>
 
-      <!-- Twitter -->
-      <a
-        class="btn btn-link btn-floating btn-lg text-dark m-1"
-        href="#!"
-        role="button"
-        data-mdb-ripple-color="dark"
-        ><i class="fa fa-twitter"></i
-      ></a>
+<script>
+  async function getReview() {
+    return fetch("{% url 'homepage:show_json' %}").then((res) => res.json())
+  }
+  
 
-      <!-- Google -->
-      <a
-        class="btn btn-link btn-floating btn-lg text-dark m-1"
-        href="#!"
-        role="button"
-        data-mdb-ripple-color="dark"
-        ><i class="fa fa-google"></i
-      ></a>
+async function refreshHomepage() {
+    
+  const review_objects = await getReview();
+  let htmlString = ''
+  review_objects.forEach((item) => {
+    htmlString += `\n
+    <div class="card-group">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">${item.fields.username}</h5>
+          <p class="card-text">${item.fields.review}</p>
+          <button type="button" id="button-delete" class="btn btn-light" onclick="deleteReview(${item.pk})">🗑️</button>
+        </div>
+      </div>
+    </div>
+    ` 
+  })
+  document.getElementById("review_history").innerHTML = htmlString
+}
 
-      <!-- Instagram -->
-      <a
-        class="btn btn-link btn-floating btn-lg text-dark m-1"
-        href="#!"
-        role="button"
-        data-mdb-ripple-color="dark"
-        ><i class="fa fa-instagram"></i
-      ></a>
-      <!-- Github -->
-      <a
-        class="btn btn-link btn-floating btn-lg text-dark m-1"
-        href="#!"
-        role="button"
-        data-mdb-ripple-color="dark"
-        ><i class="fa fa-github"></i
-      ></a>
-    </section>
-    <!-- Section: Social media -->
-  </div>
-  <!-- Grid container -->
 
-  <!-- Copyright -->
-  <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    <p class="text-dark">Created By C009-PBP-2022</p>
-  </div>
-  <!-- Copyright -->
-</footer>
+function addReview() {
+  console.log("TESaddd")
+  fetch("{% url 'homepage:add_review' %}", {
+        method: "POST",
+        body: new FormData(document.querySelector('#form_review'))
+    }).then(refreshHomepage)
+  return false
+}
+
+function deleteReview(bmiPK) {
+  // console.log("TESzzz")
+  fetch(`/delete/${bmiPK}`, {
+    method: "GET",
+    }
+    ).then(refreshHomepage)
+  return false
+}
+
+refreshHomepage()
+</script>
+
 {% endblock content %}
