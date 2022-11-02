@@ -1,27 +1,28 @@
 from django.shortcuts import render
-from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.core import serializers
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from pengaturan_akun.models import Profile
-import datetime
-from django.urls import reverse
 
 # Create your views here.
 
 @login_required(login_url='/authentication/login')
 def show_profile(request):
+    current_user = auth.get_user(request)
+
     username = request.user.username
     profile_form = EditProfile(instance=request.user.profile)
     context = {
     'username': username,
     'profile_form': profile_form,
     }
-    return render(request, 'profile.html', context)
+    if(not current_user.is_pasien):
+        return render(request, 'profile_dokter.html', context)
+    else:
+        return render(request, 'profile.html', context)
 
 @login_required(login_url='/authentication/login')
 def med_record(request):

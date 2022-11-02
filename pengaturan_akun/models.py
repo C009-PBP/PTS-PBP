@@ -10,7 +10,7 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=255, blank=True, null=True)
     email = models.EmailField(max_length=255, blank=True, null=True)
     phone_no = models.CharField(max_length=20, blank=True, null=True)
-    profile_pic = models.ImageField(blank=True, null=True, upload_to='images/profile')
+    profile_pic = models.ImageField(blank=True, null=True, upload_to='pengaturan_akun/images')
     birth_date = models.DateField(max_length=8, blank=True, null=True)
     gender = models.CharField(max_length=20, blank=True, null=True)
     street = models.CharField(max_length=255, blank=True, null=True)
