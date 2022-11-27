@@ -52,4 +52,5 @@ Di dalam aplikasi ini, Implementasi AJAX dilakukan untuk mengambil input *form* 
 
 Pada implementasi aplikasi kami, jenis pengguna yang akan dapat menggunakan app ini adalah pasien dan dokter. Pasien harus login terlebih dahulu untuk dapat menggunakan app ini. Setelah berhasil masuk, Pasien akan ter-direct ke halaman homepage. Setelahnya, di homepage akan ditampilkan akses ke dalam modul yang lain, seperti Kalkulator BMI, Pengaturan Akun (isi profil), Info Dokter, serta Tanya Dokter.
 
+
 Untuk dokter, login juga perlu dilakukan terlebih dahulu. Setelah berhasil masuk, Dokter akan ter-direct ke halaman homepage. Di homepage, akan ditampilkan akses ke dalam modul yang lain. Namun, user dengan tipe dokter tidak dapat mengakses aplikasi kalkulator BMI (diperuntukkan khusus untuk pasien). 
