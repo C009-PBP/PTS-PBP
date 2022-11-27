@@ -5,7 +5,7 @@
 * Reza Taufiq Yahya - 2106654183
 * Shafa Trivia Ezananda - 2206026971
 
-## Tautan aplikasi Heroku: https://healthbud.herokuapp.com/
+## Tautan aplikasi Heroku: https://health-bud.herokuapp.com/
 
 ## Cerita aplikasi yang diajukan serta manfaatnya:
 
