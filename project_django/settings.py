@@ -149,3 +149,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Custom Django auth settings
 
 AUTH_USER_MODEL = 'authentication.User'
+
+
+CSRF_TRUSTED_ORIGINS = ['https://health-bud.up.railway.app']
