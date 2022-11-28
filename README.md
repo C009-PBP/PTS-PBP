@@ -7,6 +7,8 @@
 
 ## Tautan aplikasi Heroku: https://health-bud.herokuapp.com/
 
+## Tautan aplikasi Railway: https://health-bud.up.railway.app/
+
 
 ## Cerita aplikasi yang diajukan serta manfaatnya:
 
