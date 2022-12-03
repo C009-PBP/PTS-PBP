@@ -26,4 +26,5 @@ urlpatterns = [
     path('bmi_calculator/', include('bmi_calculator.urls')),
     path('info_dokter/', include('info_dokter.urls')),
     path('tanya_dokter/', include('tanya_dokter.urls')),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('auth/', include('flutter_authentication.urls')),
+]
