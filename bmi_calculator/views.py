@@ -76,6 +76,11 @@ from .forms import Form_BMI
 def show_bmi_calculator(request):
     current_user = auth.get_user(request)
 
+    # print(request.user)
+    # print(request.user.get_username)
+    # print(request.user.is_pasien)
+    # print(request.user.pk)
+
     if(not current_user.is_pasien):
         # return messages("Register sebagai pasien untuk melihat fitur ini!")
         # messages.info(request, 'Anda perlu register sebagai Pasien untuk melihat fitur ini.')
@@ -93,6 +98,10 @@ def show_bmi_calculator(request):
 def show_json(request):
     # print("asijdoasdjka")
     current_user = auth.get_user(request)
+    
+    print(request)
+    print(current_user)
+
     bmi_objects = BMI.objects.filter(user=current_user)
     return HttpResponse(serializers.serialize("json", bmi_objects), content_type="application/json")
 
