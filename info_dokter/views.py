@@ -5,7 +5,6 @@ from django.core import serializers
 from .models import InfoDokter, ReviewDokter
 
 # Create your views here.
-@login_required(login_url='/authentication/login/')
 def show_info_dokter (request):
     orang = request.user
     data_info_dokter = InfoDokter.objects.all()
