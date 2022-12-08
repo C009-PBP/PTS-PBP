@@ -5,7 +5,6 @@ from django.core import serializers
 from .models import InfoDokter, ReviewDokter
 
 # Create your views here.
-@login_required(login_url='/authentication/login/')
 def show_info_dokter (request):
     orang = request.user
     data_info_dokter = InfoDokter.objects.all()
@@ -25,12 +24,11 @@ def add_review (request):
         task.save()
     return redirect('info_dokter:show_info_dokter')
 
-@login_required(login_url='/authentication/login/')
+
 def show_json(request):
     dataDokter = InfoDokter.objects.all()
     return HttpResponse(serializers.serialize("json", dataDokter), content_type="application/json")
 
-@login_required(login_url='/authentication/login/')
 def show_json2(request): 
     orang = request.user
     dataReview2 = ReviewDokter.objects.filter(user = orang)
