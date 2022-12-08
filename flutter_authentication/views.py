@@ -48,7 +48,7 @@ def get_user_data(request):
     # TODO: GET USER DATA 
     if(request.user.is_authenticated):
         return JsonResponse({
-            'username': request.user,
+            'username': str(request.user),
             'role': 'pasien' if request.user.is_pasien else 'dokter' if request.user.is_dokter else 'admin',
             'pk' : request.user.pk
         }, status=200)
