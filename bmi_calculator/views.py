@@ -99,8 +99,8 @@ def show_json(request):
     # print("asijdoasdjka")
     current_user = auth.get_user(request)
     
-    print(request)
-    print(current_user)
+    # print(request)
+    # print(current_user)
 
     bmi_objects = BMI.objects.filter(user=current_user)
     return HttpResponse(serializers.serialize("json", bmi_objects), content_type="application/json")
