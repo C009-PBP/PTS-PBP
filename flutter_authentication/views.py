@@ -14,10 +14,23 @@ def registerFlutter(request):
 
 @csrf_exempt
 def login(request):
-    username = request.POST['username']
-    password = request.POST['password']
+
+    if(request.method == "GET"):
+        print("NYASAR")
+
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+        # request.POST['username'] = username
+        # request.POST['password'] = password
+
+    # print(username)
+    # print(password)
+
     user = authenticate(username=username, password=password)
+ 
     print(user)
+
+    
     if user is not None:
         if user.is_active:
             print("AKTIF")
@@ -41,6 +54,7 @@ def login(request):
         "status": False,
         "message": "Login gagal, cek username dan passwordmu!."
         }, status=401)
+    
 
 
 @login_required(login_url='/login/')
