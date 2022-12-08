@@ -58,6 +58,7 @@ def get_user_data(request):
             'message': "Kamu belum terautentikasi!"
         }, status=401)
 
+
 @csrf_exempt
 def logout(request):
     try:
