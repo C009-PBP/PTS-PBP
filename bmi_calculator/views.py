@@ -27,6 +27,13 @@ from django.utils.decorators import method_decorator
 
 from .forms import Form_BMI
 
+from flutter_authentication.views import *
+
+
+import json
+from collections import namedtuple
+
+
 # Create your views here.
 
 
@@ -73,8 +80,15 @@ from .forms import Form_BMI
 ############################################################################################################################
 
 @login_required(login_url='/authentication/login')
+# @login_required(login_url='/auth/login')
+# @login_required
 def show_bmi_calculator(request):
     current_user = auth.get_user(request)
+
+    # print(request.user)
+    # print(request.user.get_username)
+    # print(request.user.is_pasien)
+    # print(request.user.pk)
 
     if(not current_user.is_pasien):
         # return messages("Register sebagai pasien untuk melihat fitur ini!")
@@ -93,8 +107,41 @@ def show_bmi_calculator(request):
 def show_json(request):
     # print("asijdoasdjka")
     current_user = auth.get_user(request)
+    # current_user = request.user
+    # print(current_user)
+    # print(current_user.pk)
+    
+    # Parse JSON into an object with attributes corresponding to dict keys.
+    # user_obj = json.loads(get_user_data(request), object_hook=lambda d: namedtuple('X', d.keys())(*d.values()))
+    
+    # print(request)
+    # print(current_user)
+
     bmi_objects = BMI.objects.filter(user=current_user)
+    # bmi_objects = BMI.objects.all()
+
     return HttpResponse(serializers.serialize("json", bmi_objects), content_type="application/json")
+
+
+
+def show_json_flutter(request, userId):
+    # print("asijdoasdjka")
+    # current_user = auth.get_user(request)
+    # current_user = request.user
+    # print(current_user)
+    # print(current_user.pk)
+    
+    # Parse JSON into an object with attributes corresponding to dict keys.
+    # user_obj = json.loads(get_user_data(request), object_hook=lambda d: namedtuple('X', d.keys())(*d.values()))
+    
+    # print(request)
+    # print(current_user)
+
+    bmi_objects = BMI.objects.filter(user=userId)
+    # bmi_objects = BMI.objects.all()
+
+    return HttpResponse(serializers.serialize("json", bmi_objects), content_type="application/json")
+
 
 
 # def get_bmi(request):
