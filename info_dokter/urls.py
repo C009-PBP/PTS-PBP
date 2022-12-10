@@ -2,6 +2,8 @@ from django.urls import path
 from info_dokter.views import show_info_dokter
 from info_dokter.views import add_review
 from info_dokter.views import show_json, show_json2
+from info_dokter.views import show_json_flutter
+
 app_name = 'info_dokter'
 
 urlpatterns = [
