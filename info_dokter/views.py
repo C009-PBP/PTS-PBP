@@ -40,6 +40,6 @@ def show_json2(request):
 def show_json_flutter(request, userId):
     userId = request.user
     infoDokter_objects = ReviewDokter.objects.filter(user=userId)
-    return HttpResponse(serializers.serialize("json", dataReview3), content_type="application/json")
+    return HttpResponse(serializers.serialize("json", infoDokter_objects), content_type="application/json")
 
 
