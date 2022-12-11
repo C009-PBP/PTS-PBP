@@ -41,7 +41,9 @@ def add_review_flutter (request,userId):
         task.user = request.user
         task.review = request.POST.get('Review')
         task.save()
-        return HttpResponse(b"Create", status=200)
+        return JsonResponse({
+            "status": True,
+            }, status=200)
     
 def show_json(request):
     dataDokter = InfoDokter.objects.all()
