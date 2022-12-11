@@ -124,7 +124,7 @@ def show_json(request):
 
 
 
-def show_json_flutter(request, userId):
+def show_json_flutter(request, userPK):
     # print("asijdoasdjka")
     # current_user = auth.get_user(request)
     # current_user = request.user
@@ -137,7 +137,7 @@ def show_json_flutter(request, userId):
     # print(request)
     # print(current_user)
 
-    bmi_objects = BMI.objects.filter(user=userId)
+    bmi_objects = BMI.objects.filter(user=userPK)
     # bmi_objects = BMI.objects.all()
 
     return HttpResponse(serializers.serialize("json", bmi_objects), content_type="application/json")
@@ -188,6 +188,45 @@ def add_bmi(request):
 
     return HttpResponseNotFound()
 
+
+def add_bmi_flutter(request, userPK):
+    # print("tesssssssss")
+    if(request.method == 'POST'):
+        # print("adiojasodija")
+        current_user = auth.get_user(user = userPK)
+        # jenis_kelamin = request.POST.get('jenis_kelamin')
+        umur = int(request.POST.get('umur'))
+        tinggi = int(request.POST.get('tinggi'))
+        berat = int(request.POST.get('berat'))
+        date_created = datetime.datetime.now()
+        meter_tinggi = tinggi / 100
+        bmi_result = berat/(meter_tinggi**2)
+        
+        if(bmi_result < 18.5):
+            deskripsi_hasil = "Underweight"
+        elif(bmi_result < 25):
+            deskripsi_hasil = "Normal"
+        elif(bmi_result < 30):
+            deskripsi_hasil = "Overweight"
+        else:
+            deskripsi_hasil = "Obesitas"
+        
+        if(umur < 19):
+            deskripsi_hasil = "Tidak diketahui"
+        
+        # print("tesssssssss")
+
+        new_bmi = BMI(user=current_user, umur=umur, tinggi=tinggi, berat=berat, date_created=date_created, bmi_result=bmi_result, deskripsi_hasil=deskripsi_hasil)
+        new_bmi.save()
+        
+        # print("add berhasil")
+
+        return HttpResponse(b"CREATED", status=201)
+
+    return HttpResponseNotFound()
+
+
+
 def delete_bmi(request, id):
     if(request.method == 'GET'):
         bmi_obj = BMI.objects.get(pk=id)
@@ -195,6 +234,9 @@ def delete_bmi(request, id):
 
         return HttpResponse(b"DELETED", status=201)
     return HttpResponseNotFound()
+
+
+
 
 
 ############################################################################################################################
