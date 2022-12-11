@@ -3,6 +3,10 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.core import serializers
 from .models import InfoDokter, ReviewDokter
+from flutter_authentication.views import *
+import json 
+from collections import namedtuple
+from django.utils.decorators import method_decorator
 
 # Create your views here.
 def show_info_dokter (request):
@@ -33,6 +37,9 @@ def show_json2(request):
     orang = request.user
     dataReview2 = ReviewDokter.objects.filter(user = orang)
     return HttpResponse(serializers.serialize("json", dataReview2), content_type="application/json")
-
+def show_json_flutter(request, userId):
+    userId = request.user
+    infoDokter_objects = ReviewDokter.objects.filter(user=userId)
+    return HttpResponse(serializers.serialize("json", infoDokter_objects), content_type="application/json")
 
 
