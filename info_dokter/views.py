@@ -19,15 +19,14 @@ def show_info_dokter (request):
     }
     return render (request, "info_dokter.html", context )
 
-def add_review (request):
+def add_review_flutter (request,userId):
     if request.method == 'POST':
         task = ReviewDokter()
         task.dokter =InfoDokter.objects.filter(pk= request.POST.get('Pilih Dokter'))[0]
-        task.user = request.user
+        task.user = userId
         task.review = request.POST.get('Review')
         task.save()
-    return redirect('info_dokter:show_info_dokter')
-
+        return HttpResponse(b"Create", status=200)
 
 def show_json(request):
     dataDokter = InfoDokter.objects.all()
