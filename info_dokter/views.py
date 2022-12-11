@@ -34,7 +34,7 @@ def add_review_flutter (request,userId):
     if request.method == 'POST':
         task = ReviewDokter()
         current_user = auth.get_user(user = userId)
-        task.dokter =InfoDokter.objects.filter(pk= request.POST.get('Pilih Dokter'))[0]
+        task.dokter =InfoDokter.objects.filter(pk= request.POST.get(pk= request.POST.get('idDokter'))
         task.user = current_user
         task.review = request.POST.get('Review')
         task.save()
