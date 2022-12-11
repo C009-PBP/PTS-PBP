@@ -8,6 +8,8 @@ import json
 from collections import namedtuple
 from django.contrib import auth
 from django.utils.decorators import method_decorator
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 def show_info_dokter (request):
@@ -30,6 +32,8 @@ def add_review (request):
     return redirect('info_dokter:show_info_dokter')
 
 @csrf_exempt
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
 def add_review_flutter (request,userId):
     if request.method == 'POST':
         task = ReviewDokter()
