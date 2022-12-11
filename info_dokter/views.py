@@ -23,7 +23,7 @@ def show_info_dokter (request):
 def add_review (request):
     if request.method == 'POST':
         task = ReviewDokter()
-        task.dokter =InfoDokter.objects.filter(pk= request.POST.get('idDokter'))[0]
+        task.dokter =InfoDokter.objects.filter(pk= request.POST.get('Pilih Dokter'))[0]
         task.user = request.user
         task.review = request.POST.get('Review')
         task.save()
@@ -33,7 +33,7 @@ def add_review (request):
 def add_review_flutter (request,userId):
     if request.method == 'POST':
         task = ReviewDokter()
-        task.dokter =InfoDokter.objects.filter(pk= request.POST.get('idDokter'))[0]
+        task.dokter =InfoDokter.objects.filter(pk= request.POST.get('Pilih Dokter'))[0]
         task.user = request.user
         task.review = request.POST.get('Review')
         task.save()
