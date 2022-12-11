@@ -164,20 +164,6 @@ def add_bmi(request):
         tinggi = int(request.POST.get('tinggi'))
         berat = int(request.POST.get('berat'))
 
-        print("===========")
-        print(request)
-        print(request.POST)
-        print(request.POST.get('umur'))
-
-        print(request.body)
-        # print(request.POST)
-        # print(request.POST.get('umur'))
-        print("===========")
-
-        print(umur)
-        print(tinggi)
-        print(berat)
-
 
         date_created = datetime.datetime.now()
         meter_tinggi = tinggi / 100
@@ -196,6 +182,7 @@ def add_bmi(request):
             deskripsi_hasil = "Tidak diketahui"
         
         # print("tesssssssss")
+        
 
         new_bmi = BMI(user=current_user, umur=umur, tinggi=tinggi, berat=berat, date_created=date_created, bmi_result=bmi_result, deskripsi_hasil=deskripsi_hasil)
         new_bmi.save()
@@ -205,63 +192,6 @@ def add_bmi(request):
         return HttpResponse(b"CREATED", status=201)
 
     return HttpResponseNotFound()
-
-@csrf_exempt
-def add_bmi_flutter2(request, userPK):
-    print("tesssssssss")
-    if(request.method == 'POST'):
-        print("adiojasodija")
-        # current_userPK = auth.get_user(userPK)
-        # print(current_user)
-
-        # ast reference : https://stackoverflow.com/questions/988228/convert-a-string-representation-of-a-dictionary-to-a-dictionary
-        request_data = ast.literal_eval(request.body.decode("utf-8"))
-        
-        # print(ast.literal_eval(.get('umur'))
-
-        
-        print(request.user.is_pasien)
-
-
-        umur = int(request_data.get('umur'))
-        tinggi = int(request_data.get('tinggi'))
-        berat = int(request_data.get('berat'))
-        # print(current_user)
-
-        print(umur)
-        print(tinggi)
-        print(berat)
-
-        date_created = datetime.datetime.now()
-        meter_tinggi = tinggi / 100
-        bmi_result = berat/(meter_tinggi**2)
-        
-        if(bmi_result < 18.5):
-            deskripsi_hasil = "Underweight"
-        elif(bmi_result < 25):
-            deskripsi_hasil = "Normal"
-        elif(bmi_result < 30):
-            deskripsi_hasil = "Overweight"
-        else:
-            deskripsi_hasil = "Obesitas"
-        
-        if(umur < 19):
-            deskripsi_hasil = "Tidak diketahui"
-        
-        print("tesssssssss")
-
-
-
-        new_bmi = BMI(user= request.user, umur=umur, tinggi=tinggi, berat=berat, date_created=date_created, bmi_result=bmi_result, deskripsi_hasil=deskripsi_hasil)
-        new_bmi.save()
-        
-        print("add berhasil")
-
-        return HttpResponse(b"CREATED", status=201)
-
-    return HttpResponseNotFound()
-
-
 
 
 # @login_required(login_url='/auth/login/')
@@ -339,6 +269,24 @@ def delete_bmi(request, id):
 
         return HttpResponse(b"DELETED", status=201)
     return HttpResponseNotFound()
+
+
+
+@csrf_exempt
+def delete_bmi_flutter(request, id):
+    if(request.method == 'POST'):
+        bmi_obj = BMI.objects.get(pk=id)
+        bmi_obj.delete()
+
+        return JsonResponse({
+            "status" : True,
+            "message": "Berhasil menghapus histori BMI!"
+        }, status= 200)
+    
+    return JsonResponse({
+            "status" : True,
+            "message": "Berhasil menghapus histori BMI!"
+        }, status = 401)
 
 
 

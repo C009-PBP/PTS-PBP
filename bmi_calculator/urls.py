@@ -12,6 +12,7 @@ urlpatterns = [
     path('add/<int:userPK>', add_bmi_flutter, name='add_bmi_flutter'),
     
     path('delete/<int:id>', delete_bmi, name='delete_bmi'),
+    path('delete-from-flutter/<int:id>', delete_bmi_flutter, name='delete_bmi_flutter'),
     
     path('json-flutter/<int:userPK>', show_json_flutter, name='show_json_flutter'),
 
