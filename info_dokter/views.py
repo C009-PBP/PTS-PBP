@@ -6,6 +6,7 @@ from .models import InfoDokter, ReviewDokter
 from flutter_authentication.views import *
 import json 
 from collections import namedtuple
+from django.contrib import auth
 from django.utils.decorators import method_decorator
 
 # Create your views here.
@@ -32,12 +33,12 @@ def add_review (request):
 def add_review_flutter (request,userId):
     if request.method == 'POST':
         task = ReviewDokter()
-        task.dokter =InfoDokter.objects.filter(pk= request.POST.get('idDokter'))
-        task.user = userId
+        current_user = auth.get_user(user = userId)
+        task.dokter =InfoDokter.objects.filter(pk= request.POST.get('Pilih Dokter'))[0]
+        task.user = current_user
         task.review = request.POST.get('Review')
         task.save()
         return HttpResponse(b"Create", status=200)
-
 def show_json(request):
     dataDokter = InfoDokter.objects.all()
     return HttpResponse(serializers.serialize("json", dataDokter), content_type="application/json")
