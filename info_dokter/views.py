@@ -23,22 +23,24 @@ def show_info_dokter (request):
 def add_review (request):
     if request.method == 'POST':
         task = ReviewDokter()
-        task.dokter =InfoDokter.objects.filter(pk= request.POST.get('Pilih Dokter'))[0]
+        task.dokter =InfoDokter.objects.filter(pk= request.POST.get('idDokter'))
         task.user = request.user
         task.review = request.POST.get('Review')
         task.save()
     return redirect('info_dokter:show_info_dokter')
 
+@login_required(login_url='/authentication/login')
 @csrf_exempt
 def add_review_flutter (request,userId):
     if request.method == 'POST':
         task = ReviewDokter()
         current_user = auth.get_user(user = userId)
-        task.dokter =InfoDokter.objects.filter(pk= request.POST.get(pk= request.POST.get('idDokter'))
+        task.dokter =InfoDokter.objects.filter(pk= request.POST.get('idDokter'))
         task.user = current_user
         task.review = request.POST.get('Review')
         task.save()
         return HttpResponse(b"Create", status=200)
+    
 def show_json(request):
     dataDokter = InfoDokter.objects.all()
     return HttpResponse(serializers.serialize("json", dataDokter), content_type="application/json")
