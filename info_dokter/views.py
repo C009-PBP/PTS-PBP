@@ -37,9 +37,8 @@ def add_review (request):
 def add_review_flutter (request,userId):
     if request.method == 'POST':
         task = ReviewDokter()
-        current_user = auth.get_user(user = userId)
         task.dokter =InfoDokter.objects.filter(pk= request.POST.get('idDokter'))
-        task.user = current_user
+        task.user = request.user
         task.review = request.POST.get('Review')
         task.save()
         return HttpResponse(b"Create", status=200)
