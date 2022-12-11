@@ -8,6 +8,10 @@ import json
 from collections import namedtuple
 from django.contrib import auth
 from django.utils.decorators import method_decorator
+from django.contrib import auth
+from django.contrib.auth import authenticate, login
+from urllib import request
+from django.shortcuts import render
 
 # Create your views here.
 def show_info_dokter (request):
