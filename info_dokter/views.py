@@ -29,7 +29,6 @@ def add_review (request):
         task.save()
     return redirect('info_dokter:show_info_dokter')
 
-@login_required(login_url='/authentication/login')
 @csrf_exempt
 def add_review_flutter (request,userId):
     if request.method == 'POST':
