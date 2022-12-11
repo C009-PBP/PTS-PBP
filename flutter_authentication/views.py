@@ -27,7 +27,7 @@ def login(request):
     # print(password)
 
     user = authenticate(username=username, password=password)
- 
+    
     print(user)
 
     
@@ -60,11 +60,16 @@ def login(request):
 @login_required(login_url='/login/')
 def get_user_data(request):
     # TODO: GET USER DATA 
+
+    print(request.user.is_pasien)
+    
+    # print(request.user.is_dokter)
     if(request.user.is_authenticated):
         return JsonResponse({
             'username': str(request.user),
             'role': 'pasien' if request.user.is_pasien else 'dokter' if request.user.is_dokter else 'admin',
-            'pk' : request.user.pk
+            'pk' : request.user.pk,
+            # 'user' : request.user
         }, status=200)
         
     else:

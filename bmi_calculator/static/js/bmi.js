@@ -4,6 +4,8 @@ async function getBMI() {
 
 
  function addBMI() {
+  // console.log("TEST");
+  // console.log(new FormData(document.querySelector('#form_bmi')));
   fetch(`/bmi_calculator/add/`, {
         method: "POST",
         body: new FormData(document.querySelector('#form_bmi'))
