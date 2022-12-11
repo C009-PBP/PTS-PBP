@@ -182,6 +182,7 @@ def add_bmi(request):
             deskripsi_hasil = "Tidak diketahui"
         
         # print("tesssssssss")
+        
 
         new_bmi = BMI(user=current_user, umur=umur, tinggi=tinggi, berat=berat, date_created=date_created, bmi_result=bmi_result, deskripsi_hasil=deskripsi_hasil)
         new_bmi.save()
