@@ -28,6 +28,15 @@ def add_review (request):
         task.save()
     return redirect('info_dokter:show_info_dokter')
 
+@csrf_exempt
+def add_review_flutter (request,userId):
+    if request.method == 'POST':
+        task = ReviewDokter()
+        task.dokter =InfoDokter.objects.filter(pk= request.POST.get('idDokter'))
+        task.user = userId
+        task.review = request.POST.get('Review')
+        task.save()
+        return HttpResponse(b"Create", status=200)
 
 def show_json(request):
     dataDokter = InfoDokter.objects.all()
@@ -38,7 +47,6 @@ def show_json2(request):
     dataReview2 = ReviewDokter.objects.filter(user = orang)
     return HttpResponse(serializers.serialize("json", dataReview2), content_type="application/json")
 def show_json_flutter(request, userId):
-    userId = request.user
     infoDokter_objects = ReviewDokter.objects.filter(user=userId)
     return HttpResponse(serializers.serialize("json", infoDokter_objects), content_type="application/json")
 
