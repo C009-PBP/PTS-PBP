@@ -19,6 +19,8 @@ from django.core import serializers
 from .forms import PasienSignUpForm, DokterSignUpForm
 
 from django.contrib.auth.decorators import user_passes_test
+from .models import *
+
 
 # Create your views here.
 def register(request):
@@ -84,3 +86,23 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('homepage:index'))
     #response.delete_cookie('last_login')
     return response
+
+
+def get_user_json(request, userPK):
+        # print("asijdoasdjka")
+    # current_user = auth.get_user(request)
+    # current_user = request.user
+    # print(current_user)
+    # print(current_user.pk)
+    
+    # Parse JSON into an object with attributes corresponding to dict keys.
+    # user_obj = json.loads(get_user_data(request), object_hook=lambda d: namedtuple('X', d.keys())(*d.values()))
+    
+    # print(request)
+    # print(current_user)
+
+    user_object = User.objects.filter(pk=userPK)
+    # bmi_objects = BMI.objects.all()
+
+    return HttpResponse(serializers.serialize("json", user_object), content_type="application/json")
+
