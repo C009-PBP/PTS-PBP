@@ -103,18 +103,22 @@ def show_profile_json_flutter(request, pk):
 
 @csrf_exempt
 def update_profile_flutter(request, pk):
-    print(request.method)
     if request.method == "POST":
         user_profile = Profile.objects.get(pk=pk)
-        user_profile.first_name = request.POST.get('first_name')
-        user_profile.last_name = request.POST.get('last_name')
-        user_profile.phone_no = request.POST.get('phone_no')
-        user_profile.email = request.POST.get('email')
-        user_profile.birth_date = request.POST.get('birth_date')
-        user_profile.street = request.POST.get('street')
-        user_profile.city = request.POST.get('city')
-        user_profile.province = request.POST.get('province')
-        user_profile.gender = request.POST.get('gender')
-        user_profile.save()
-        return JsonResponse({"message": "Success"})
+        form = EditProfile(request.POST, request.FILES, instance=request.user.profile)
+
+        if form.is_valid():
+            user_profile.first_name = request.POST.get('first_name')
+            user_profile.last_name = request.POST.get('last_name')
+            user_profile.phone_no = request.POST.get('phone_no')
+            user_profile.email = request.POST.get('email')
+            user_profile.birth_date = request.POST.get('birth_date')
+            user_profile.street = request.POST.get('street')
+            user_profile.city = request.POST.get('city')
+            user_profile.province = request.POST.get('province')
+            user_profile.gender = request.POST.get('gender')
+            user_profile.save()
+            return JsonResponse({"message": "Success"})
+
+        return JsonResponse({"message": "Validation Failed"})
     return JsonResponse({"message": "Wrong Request"})
