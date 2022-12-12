@@ -12,4 +12,6 @@ urlpatterns = [
     path('update_record/<int:pk>', update_record_ajax, name='update_record_ajax'),
     path('json-flutter/<int:pk>', show_profile_json_flutter, name='show_profile_json_flutter'),
     path('update-flutter/<int:pk>', update_profile_flutter, name='update_profile_flutter'),
+    path('update-emergency-flutter/<int:pk>', update_emergency_flutter, name='update_emergency_flutter'),
+    path('update-record-flutter/<int:pk>', update_record_flutter, name='update_record_flutter'),
 ]
