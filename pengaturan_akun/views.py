@@ -95,3 +95,7 @@ def update_record_ajax(request, pk):
         return JsonResponse({"message": "Validation Failed"})
 
     return JsonResponse({"message": "Wrong Request"})
+
+def show_profile_json_flutter(request, pk):
+    profile = Profile.objects.filter(user=pk)
+    return HttpResponse(serializers.serialize("json", profile), content_type="application/json")
