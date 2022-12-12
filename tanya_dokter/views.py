@@ -55,7 +55,11 @@ def home(request):
 
 
 def home_flutter(request, id):
-    data = serializers.serialize('json', Question.objects.annotate(total_comments=Count('answer__comment')).all().order_by('-id'))
+    if 'q' in request.GET:
+        q = request.GET['q']
+        data = serializers.serialize('json', Question.objects.annotate(total_comments=Count('answer__comment')).filter(title__icontains=q).order_by('-id'))
+    else:
+        data = serializers.serialize('json', Question.objects.annotate(total_comments=Count('answer__comment')).all().order_by('-id'))
     return HttpResponse(data, content_type="application/json")
 
 
