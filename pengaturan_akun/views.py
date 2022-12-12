@@ -113,12 +113,13 @@ def update_profile_flutter(request, pk):
             user_profile.phone_no = form.cleaned_data['phone_no']
             user_profile.email = form.cleaned_data['email']
             user_profile.birth_date = form.cleaned_data['birth_date']
-            user_profile.gender = form.cleaned_data['gender']
             user_profile.street = form.cleaned_data['street']
             user_profile.city = form.cleaned_data['city']
             user_profile.province = form.cleaned_data['province']
-            user_profile.profile_pic = form.cleaned_data['profile_pic']
+            user_profile.gender = form.cleaned_data['gender']
             user_profile.save()
+            return JsonResponse({"message": "Success"})
+            
         return JsonResponse({"message": "Validation Failed"})
 
     return JsonResponse({"message": "Wrong Request"})
