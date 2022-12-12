@@ -55,6 +55,8 @@ def show_json2(request):
     return HttpResponse(serializers.serialize("json", dataReview2), content_type="application/json")
 def show_json_flutter(request, userId):
     infoDokter_objects = ReviewDokter.objects.filter(user=userId)
-    return HttpResponse(serializers.serialize("json", infoDokter_objects), content_type="application/json")
+    return JsonResponse({
+            "data": infoDokter_objects,
+            }, status=200)
 
 
