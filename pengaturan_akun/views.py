@@ -108,18 +108,18 @@ def update_profile_flutter(request, pk):
         form = EditProfile(request.POST, request.FILES, instance=request.user.profile)
 
         if form.is_valid():
-            user_profile.first_name = form.cleaned_data['first_name']
-            user_profile.last_name = form.cleaned_data['last_name']
-            user_profile.phone_no = form.cleaned_data['phone_no']
-            user_profile.email = form.cleaned_data['email']
-            user_profile.birth_date = form.cleaned_data['birth_date']
-            user_profile.street = form.cleaned_data['street']
-            user_profile.city = form.cleaned_data['city']
-            user_profile.province = form.cleaned_data['province']
-            user_profile.gender = form.cleaned_data['gender']
+            user_profile.first_name = request.POST.get('first_name')
+            user_profile.last_name = request.POST.get('last_name')
+            user_profile.phone_no = request.POST.get('phone_no')
+            user_profile.email = request.POST.get('email')
+            user_profile.birth_date = request.POST.get('birth_date')
+            user_profile.street = request.POST.get('street')
+            user_profile.city = request.POST.get('city')
+            user_profile.province = request.POST.get('province')
+            user_profile.gender = request.POST.get('gender')
             user_profile.save()
             return JsonResponse({"message": "Success"})
-            
-        return JsonResponse({"message": "Validation Failed"})
 
+        return JsonResponse({"message": "Validation Failed"})
+    print(request.method)
     return JsonResponse({"message": "Wrong Request"})
