@@ -141,6 +141,7 @@ def update_emergency_flutter(request, pk):
         return JsonResponse({"message": "Validation Failed"})
     return JsonResponse({"message": "Wrong Request"})
 
+@csrf_exempt
 def update_record_flutter(request, pk):
     if request.method == "POST":
         med_record = Profile.objects.get(pk=pk)
