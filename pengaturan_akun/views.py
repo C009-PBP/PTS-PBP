@@ -119,6 +119,39 @@ def update_profile_flutter(request, pk):
             user_profile.gender = request.POST.get('gender')
             user_profile.save()
             return JsonResponse({"message": "Success"})
+        return JsonResponse({"message": "Validation Failed"})
+    return JsonResponse({"message": "Wrong Request"})
 
+@csrf_exempt
+def update_emergency_flutter(request, pk):
+    if request.method == "POST":
+        emergency_contact = Profile.objects.get(pk=pk)
+        emergency_contact_form = EditEmergencyContact(request.POST, instance=request.user.profile)
+        
+        if emergency_contact_form.is_valid():
+            emergency_contact.emergency_firstname = request.POST.get('emergency_firstname')
+            emergency_contact.emergency_lastname = request.POST.get('emergency_lastname')
+            emergency_contact.emergency_relationship = request.POST.get('emergency_relationship')
+            emergency_contact.emergency_phone_no = request.POST.get('emergency_phone_no')
+            emergency_contact.emergency_street = request.POST.get('emergency_street')
+            emergency_contact.emergency_city = request.POST.get('emergency_city')
+            emergency_contact.emergency_province = request.POST.get('emergency_province')
+            emergency_contact.save()
+            return JsonResponse({"message": "Success"})
+        return JsonResponse({"message": "Validation Failed"})
+    return JsonResponse({"message": "Wrong Request"})
+
+def update_record_flutter(request, pk):
+    if request.method == "POST":
+        med_record = Profile.objects.get(pk=pk)
+        med_record_form = EditMedRecord(request.POST, instance=request.user.profile)
+        
+        if med_record_form.is_valid():
+            med_record.bloodtype = request.POST.get('bloodtype')
+            med_record.bloodpressure = request.POST.get('bloodpressure')
+            med_record.illnesses = request.POST.get('illnesses')
+            med_record.allergies = request.POST.get('allergies')
+            med_record.save()
+            return JsonResponse({"message": "Success"})
         return JsonResponse({"message": "Validation Failed"})
     return JsonResponse({"message": "Wrong Request"})
