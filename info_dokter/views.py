@@ -34,7 +34,7 @@ def add_review (request):
     return redirect('info_dokter:show_info_dokter')
 
 @csrf_exempt
-def add_review_flutter (request,userId):
+def add_review_flutter (request):
     if request.method == 'POST':
         task = ReviewDokter()
         task.dokter =InfoDokter.objects.filter(pk= request.POST.get('Pilih Dokter'))[0]
