@@ -117,7 +117,6 @@ def update_profile_flutter(request, pk):
             user_profile.street = request.POST.get('street')
             user_profile.city = request.POST.get('city')
             user_profile.province = request.POST.get('province')
-            user_profile.profile_pic = form.cleaned_data['profile_pic']
             
             user_profile.save()
             return JsonResponse({"message": "Success"})
