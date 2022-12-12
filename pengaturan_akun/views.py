@@ -105,7 +105,7 @@ def show_profile_json_flutter(request, pk):
 def update_profile_flutter(request, pk):
     if request.method == "POST":
         user_profile = Profile.objects.get(pk=pk)
-        form = EditProfile(request.POST, request.FILES, instance=request.user.profile)
+        form = EditProfile(request.POST, instance=request.user.profile)
 
         if form.is_valid():
             user_profile.first_name = request.POST.get('first_name')
