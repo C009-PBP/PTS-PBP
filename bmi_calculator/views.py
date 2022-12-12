@@ -284,8 +284,8 @@ def delete_bmi_flutter(request, id):
         }, status= 200)
     
     return JsonResponse({
-            "status" : True,
-            "message": "Berhasil menghapus histori BMI!"
+            "status" : False,
+            "message": "Gagal menghapus histori BMI."
         }, status = 401)
 
 
