@@ -54,6 +54,11 @@ def home(request):
     return render(request, 'tanya_dokter/forum.html', {'quests': quests})
 
 
+def home_flutter(request):
+    data = serializers.serialize('json', Question.objects.annotate(total_comments=Count('answer__comment')).all().order_by('-id'))
+    return HttpResponse(data, content_type="application/json")
+
+
 # detail question
 @login_required(login_url='/authentication/login')
 def show_detail(request, id):
