@@ -55,11 +55,8 @@ def home(request):
 
 
 def home_flutter(request, id):
-    quest = Question.objects.get(pk=id)
-    data = Answer.objects.filter(question=quest)
-    return HttpResponse(serializers.serialize("json", data),
-                        content_type="application/json")
-
+    data = serializers.serialize('json', Question.objects.annotate(total_comments=Count('answer__comment')).all().order_by('-id'))
+    return HttpResponse(data, content_type="application/json")
 
 # detail question
 @login_required(login_url='/authentication/login')
