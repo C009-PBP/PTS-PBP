@@ -105,7 +105,7 @@ def show_profile_json_flutter(request, pk):
 def update_profile_flutter(request, pk):
     if request.method == "POST":
         user_profile = Profile.objects.get(pk=pk)
-        form = EditProfile(request.POST, instance=request.user.profile)
+        form = EditProfile(request.POST, request.FILES, instance=request.user.profile)
 
         if form.is_valid():
             user_profile.first_name = request.POST.get('first_name')
@@ -113,10 +113,12 @@ def update_profile_flutter(request, pk):
             user_profile.phone_no = request.POST.get('phone_no')
             user_profile.email = request.POST.get('email')
             user_profile.birth_date = request.POST.get('birth_date')
+            user_profile.gender = request.POST.get('gender')
             user_profile.street = request.POST.get('street')
             user_profile.city = request.POST.get('city')
             user_profile.province = request.POST.get('province')
-            user_profile.gender = request.POST.get('gender')
+            user_profile.profile_pic = form.cleaned_data['profile_pic']
+            
             user_profile.save()
             return JsonResponse({"message": "Success"})
         return JsonResponse({"message": "Validation Failed"})
