@@ -10,8 +10,8 @@ urlpatterns = [
     path('forum/detail/<int:id>/', views.show_detail, name='detail'),
     path('save-comment/', views.save_comment, name='save-comment'),
     path('add_question/', views.ask_form, name='ask-question'),
-    path('json/<int:id>', views.form_ajax, name='form_ajax'),
-    path('json-all/<int:id>', views.home_flutter, name='home_flutter'),
+    path('json/<int:id>/', views.form_ajax, name='form_ajax'),
+    path('json-all/<int:id>/', views.home_flutter, name='home_flutter'),
     # path('view/', views.ForumView.as_view(), name='forum_view'),
     # path('create/forum', views.CreateForum.as_view(), name='create_forum'),
     
